@@ -1,0 +1,32 @@
+{
+  "name": "personal-website",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "Developer",
+    "Resume",
+    "Portfolio",
+    "Technology"
+  ],
+  "homepage": "https://github.com/JosephDriedger/Personal-Website#readme",
+  "bugs": {
+    "url": "https://github.com/JosephDriedger/Personal-Website/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JosephDriedger/Personal-Website.git"
+  },
+  "license": "ISC",
+  "author": "Joseph Driedger",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "mysql2": "^3.13.0"
+  }
+}
