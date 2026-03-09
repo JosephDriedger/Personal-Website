@@ -1,0 +1,16 @@
+.contact-page {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.contact-copy {
+    padding-top: 1rem;
+}
+
+@media (max-width: 900px) {
+    .contact-page {
+        grid-template-columns: 1fr;
+    }
+}

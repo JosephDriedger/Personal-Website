@@ -1,0 +1,21 @@
+.about-page {
+    max-width: 980px;
+}
+
+.about-page > p {
+    max-width: 760px;
+    color: var(--text-soft);
+    margin-bottom: 2rem;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+}

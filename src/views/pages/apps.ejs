@@ -1,25 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
 <%- include('../partials/head') %>
+<body>
     <%- include('../partials/navbar') %>
 
-        <main class="page page-apps">
+    <main class="container page page-projects">
+        <section class="page-header reveal-on-scroll">
+            <span class="eyebrow">Apps</span>
+            <h1>Software and web applications</h1>
+            <p>Utilities, websites, tools, and application-focused builds.</p>
+        </section>
 
-            <section class="page-header">
-                <h1>Applications</h1>
-                <p>Software tools, utilities, and web applications I have built.</p>
-            </section>
+        <section class="project-grid">
+            <% if (projects && projects.length) { %>
+                <% projects.forEach(project => { %>
+                    <%- include('../partials/project-card', { project: project }) %>
+                <% }) %>
+            <% } else { %>
+                <p class="empty-state">No applications available.</p>
+            <% } %>
+        </section>
+    </main>
 
-            <section class="project-grid">
+    <%- include('../partials/footer') %>
 
-                <% if (projects.length===0) { %>
-                    <p>No applications available.</p>
-                    <% } %>
-
-                        <% projects.forEach(project=> { %>
-                            <%- include('../partials/project-card', { project: project }) %>
-                                <% }) %>
-
-            </section>
-
-        </main>
-
-        <%- include('../partials/footer') %>
+    <script src="/js/main.js"></script>
+    <script src="/js/nav.js"></script>
+</body>
+</html>

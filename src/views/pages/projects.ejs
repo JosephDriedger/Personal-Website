@@ -1,23 +1,45 @@
-<section class="projects-page">
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+    <%- include('../partials/navbar') %>
 
-<h1>Projects</h1>
+    <main class="container page page-projects">
+        <section class="page-header reveal-on-scroll">
+            <span class="eyebrow">Projects</span>
+            <h1>Games, apps, and technical builds</h1>
+            <p>Browse development work across software, tools, game systems, and creative projects.</p>
+        </section>
 
-<div class="project-grid">
+        <section class="filter-bar reveal-on-scroll">
+            <div class="filter-search-wrap">
+                <input type="search" id="project-search" class="filter-search" placeholder="Search projects by title or category">
+            </div>
 
-<% projects.forEach(project => { %>
+            <div class="filter-buttons">
+                <button class="filter-btn is-active" type="button" data-filter="all">All</button>
+                <button class="filter-btn" type="button" data-filter="game">Games</button>
+                <button class="filter-btn" type="button" data-filter="app">Apps</button>
+            </div>
+        </section>
 
-<div class="project-card">
+        <section class="project-grid" id="project-grid">
+            <% if (projects && projects.length) { %>
+                <% projects.forEach(project => { %>
+                    <%- include('../partials/project-card', { project: project }) %>
+                <% }) %>
+            <% } else { %>
+                <p class="empty-state">No projects available.</p>
+            <% } %>
+        </section>
 
-<h3><%= project.title %></h3>
+        <p id="project-empty-message" class="empty-state hidden">No projects match your current filter.</p>
+    </main>
 
-<p><%= project.description %></p>
+    <%- include('../partials/footer') %>
 
-<a href="<%= project.link %>">View</a>
-
-</div>
-
-<% }) %>
-
-</div>
-
-</section>
+    <script src="/js/main.js"></script>
+    <script src="/js/nav.js"></script>
+    <script src="/js/project-filters.js"></script>
+</body>
+</html>

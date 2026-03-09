@@ -1,56 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
 <%- include('../partials/head') %>
+<body>
     <%- include('../partials/navbar') %>
 
-        <main class="page page-project-detail">
+    <main class="container page page-project-detail">
+        <section class="project-hero reveal-on-scroll">
+            <div>
+                <span class="eyebrow">Project Detail</span>
+                <h1><%= project.title %></h1>
+                <p class="project-summary"><%= project.description %></p>
+            </div>
 
-            <section class="project-hero">
+            <% if (project.image) { %>
+                <img src="/images/projects/<%= project.image %>" alt="<%= project.title %>" class="project-image">
+            <% } %>
+        </section>
 
-                <h1>
-                    <%= project.title %>
-                </h1>
+        <section class="project-info reveal-on-scroll">
+            <div class="project-meta detail-card">
+                <p><strong>Category:</strong> <%= project.category || 'Project' %></p>
 
-                <% if (project.image) { %>
-                    <img src="/images/projects/<%= project.image %>" alt="<%= project.title %>" class="project-image">
-                    <% } %>
-
-                        <p class="project-summary">
-                            <%= project.description %>
-                        </p>
-
-            </section>
-
-
-            <section class="project-info">
-
-                <div class="project-meta">
-
+                <% if (project.github) { %>
                     <p>
-                        <strong>Category:</strong>
-                        <%= project.category %>
+                        <strong>GitHub:</strong>
+                        <a href="<%= project.github %>" target="_blank" rel="noreferrer">View Repository</a>
                     </p>
+                <% } %>
 
-                    <% if (project.github) { %>
-                        <p>
-                            <strong>GitHub:</strong>
-                            <a href="<%= project.github %>" target="_blank">
-                                View Repository
-                            </a>
-                        </p>
-                        <% } %>
+                <% if (project.demo) { %>
+                    <p>
+                        <strong>Live Demo:</strong>
+                        <a href="<%= project.demo %>" target="_blank" rel="noreferrer">View Demo</a>
+                    </p>
+                <% } %>
+            </div>
+        </section>
+    </main>
 
-                            <% if (project.demo) { %>
-                                <p>
-                                    <strong>Live Demo:</strong>
-                                    <a href="<%= project.demo %>" target="_blank">
-                                        View Demo
-                                    </a>
-                                </p>
-                                <% } %>
+    <%- include('../partials/footer') %>
 
-                </div>
-
-            </section>
-
-        </main>
-
-        <%- include('../partials/footer') %>
+    <script src="/js/main.js"></script>
+    <script src="/js/nav.js"></script>
+</body>
+</html>

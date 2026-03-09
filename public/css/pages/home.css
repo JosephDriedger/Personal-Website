@@ -1,0 +1,48 @@
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+    gap: 1.5rem;
+    align-items: stretch;
+    padding-top: 1rem;
+    margin-bottom: 3rem;
+}
+
+.hero-copy,
+.hero-panel {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+    box-shadow: var(--shadow);
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 1.5rem;
+}
+
+.hero-panel {
+    display: flex;
+}
+
+.stat-card {
+    width: 100%;
+}
+
+.stat-card strong {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.featured-projects {
+    padding-bottom: 1rem;
+}
+
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: 1fr;
+    }
+}

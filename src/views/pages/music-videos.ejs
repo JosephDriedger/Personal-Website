@@ -1,25 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
 <%- include('../partials/head') %>
+<body>
     <%- include('../partials/navbar') %>
 
-        <main class="page page-music-videos">
+    <main class="container page page-music-videos">
+        <section class="page-header reveal-on-scroll">
+            <span class="eyebrow">Music Videos</span>
+            <h1>Creative video and music content</h1>
+            <p>Music and visual work featured from my YouTube content.</p>
+        </section>
 
-            <section class="page-header">
-                <h1>Music Videos</h1>
-                <p>Music and creative video content from my YouTube channel.</p>
-            </section>
+        <section class="video-grid">
+            <% if (videos && videos.length) { %>
+                <% videos.forEach(video => { %>
+                    <%- include('../partials/video-card', { video: video }) %>
+                <% }) %>
+            <% } else { %>
+                <p class="empty-state">No videos available.</p>
+            <% } %>
+        </section>
+    </main>
 
-            <section class="video-grid">
+    <%- include('../partials/footer') %>
 
-                <% if (videos.length===0) { %>
-                    <p>No videos available.</p>
-                    <% } %>
-
-                        <% videos.forEach(video=> { %>
-                            <%- include('../partials/video-card', { video: video }) %>
-                                <% }) %>
-
-            </section>
-
-        </main>
-
-        <%- include('../partials/footer') %>
+    <script src="/js/main.js"></script>
+    <script src="/js/nav.js"></script>
+</body>
+</html>

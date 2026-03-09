@@ -1,27 +1,25 @@
-<div class="project-card">
-
-    <a href="/projects/<%= project.id %>">
-
+<article class="project-card" data-category="<%= (project.category || '').toLowerCase() %>" data-title="<%= (project.title || '').toLowerCase() %>" data-type="<%= (project.type || project.category || '').toLowerCase() %>">
+    <a href="/projects/<%= project.id %>" class="project-card-link">
         <% if (project.image) { %>
             <img src="/images/projects/<%= project.image %>" alt="<%= project.title %>" class="project-thumbnail">
-            <% } %>
+        <% } else { %>
+            <div class="project-thumbnail project-thumbnail-placeholder">
+                <span><%= project.title %></span>
+            </div>
+        <% } %>
 
-                <div class="project-card-content">
+        <div class="project-card-content">
+            <div class="project-card-topline">
+                <span class="project-category"><%= project.category || project.type || 'Project' %></span>
+            </div>
 
-                    <h3 class="project-title">
-                        <%= project.title %>
-                    </h3>
+            <h3 class="project-title"><%= project.title %></h3>
 
-                    <p class="project-description">
-                        <%= project.description.substring(0, 120) %>...
-                    </p>
+            <p class="project-description">
+                <%= (project.description && project.description.length > 120) ? `${project.description.substring(0, 120)}...` : (project.description || 'No description available yet.') %>
+            </p>
 
-                    <span class="project-category">
-                        <%= project.category %>
-                    </span>
-
-                </div>
-
+            <span class="project-link-text">View details</span>
+        </div>
     </a>
-
-</div>
+</article>

@@ -1,9 +1,21 @@
-<section class="not-found">
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+    <%- include('../partials/navbar') %>
 
-    <h1>404</h1>
+    <main class="container page">
+        <section class="not-found reveal-on-scroll">
+            <span class="eyebrow">404</span>
+            <h1>Page not found</h1>
+            <p>The page you are looking for does not exist or has moved.</p>
+            <a href="/" class="btn btn-primary">Return Home</a>
+        </section>
+    </main>
 
-    <p>Page not found.</p>
+    <%- include('../partials/footer') %>
 
-    <a href="/">Return Home</a>
-
-</section>
+    <script src="/js/main.js"></script>
+    <script src="/js/nav.js"></script>
+</body>
+</html>

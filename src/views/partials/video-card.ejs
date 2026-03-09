@@ -1,23 +1,13 @@
-<div class="video-card">
-
+<article class="video-card reveal-on-scroll">
     <div class="video-container">
-
         <iframe src="https://www.youtube.com/embed/<%= video.youtube_id %>" title="<%= video.title %>" frameborder="0"
-            allowfullscreen>
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
         </iframe>
-
     </div>
 
     <div class="video-info">
-
-        <h3>
-            <%= video.title %>
-        </h3>
-
-        <p>
-            <%= video.description %>
-        </p>
-
+        <h3><%= video.title %></h3>
+        <p><%= video.description || 'No description available.' %></p>
     </div>
-
-</div>
+</article>

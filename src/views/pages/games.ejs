@@ -1,25 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
 <%- include('../partials/head') %>
+<body>
     <%- include('../partials/navbar') %>
 
-        <main class="page page-games">
+    <main class="container page page-projects">
+        <section class="page-header reveal-on-scroll">
+            <span class="eyebrow">Games</span>
+            <h1>Game development projects</h1>
+            <p>Game engines, prototypes, gameplay systems, and complete game projects.</p>
+        </section>
 
-            <section class="page-header">
-                <h1>Games</h1>
-                <p>Game development projects including engines, prototypes, and released titles.</p>
-            </section>
+        <section class="project-grid">
+            <% if (projects && projects.length) { %>
+                <% projects.forEach(project => { %>
+                    <%- include('../partials/project-card', { project: project }) %>
+                <% }) %>
+            <% } else { %>
+                <p class="empty-state">No games available.</p>
+            <% } %>
+        </section>
+    </main>
 
-            <section class="project-grid">
+    <%- include('../partials/footer') %>
 
-                <% if (projects.length===0) { %>
-                    <p>No games available.</p>
-                    <% } %>
-
-                        <% projects.forEach(project=> { %>
-                            <%- include('../partials/project-card', { project: project }) %>
-                                <% }) %>
-
-            </section>
-
-        </main>
-
-        <%- include('../partials/footer') %>
+    <script src="/js/main.js"></script>
+    <script src="/js/nav.js"></script>
+</body>
+</html>

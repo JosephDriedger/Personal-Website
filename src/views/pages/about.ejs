@@ -1,22 +1,47 @@
-<section class="about-page">
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+    <%- include('../partials/navbar') %>
 
-    <h1>About Me</h1>
+    <main class="container page page-about">
+        <section class="about-page reveal-on-scroll">
+            <span class="eyebrow">About Me</span>
+            <h1>Building technical and creative experiences</h1>
 
-    <p>
+            <p>
+                I'm a software engineer and game developer studying at BCIT. I enjoy building polished systems,
+                experimenting with interactive design, and creating projects that combine engineering and creativity.
+            </p>
 
-        I'm a software engineer and game developer studying at BCIT.
+            <div class="about-grid">
+                <article class="about-card">
+                    <h2>What I work on</h2>
+                    <ul>
+                        <li>Game development</li>
+                        <li>Custom engines and tools</li>
+                        <li>Web applications</li>
+                        <li>AI and software projects</li>
+                        <li>Music and video production</li>
+                    </ul>
+                </article>
 
-        My work includes:
+                <article class="about-card">
+                    <h2>What I value</h2>
+                    <ul>
+                        <li>Clean architecture</li>
+                        <li>Strong UX and presentation</li>
+                        <li>Iterative development</li>
+                        <li>Creative experimentation</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+    </main>
 
-    </p>
+    <%- include('../partials/footer') %>
 
-    <ul>
-
-        <li>Game Development</li>
-        <li>Custom Game Engines</li>
-        <li>AI Projects</li>
-        <li>Music Production</li>
-
-    </ul>
-
-</section>
+    <script src="/js/main.js"></script>
+    <script src="/js/nav.js"></script>
+</body>
+</html>
