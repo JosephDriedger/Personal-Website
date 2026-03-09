@@ -1,0 +1,14 @@
+---
+deployment:
+  tasks:
+    - export APPPATH=/home/joeydrie/Personal-Website
+    - /bin/mkdir -p $APPPATH
+
+    - /bin/cp package.json $APPPATH
+    - /bin/cp package-lock.json $APPPATH
+
+    - /bin/cp -R src $APPPATH
+    - /bin/cp -R public $APPPATH
+    - /bin/cp -R sql $APPPATH
+
+    - /bin/echo "Deployment complete"
