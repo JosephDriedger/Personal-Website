@@ -21,12 +21,15 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon ./src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
-    "mysql2": "^3.13.0"
+    "mysql2": "^3.13.0",
+    "nodemon": "^3.1.14",
+    "path": "^0.12.7"
   }
 }
