@@ -1,0 +1,25 @@
+<%- include('../partials/head') %>
+    <%- include('../partials/navbar') %>
+
+        <main class="page page-music-videos">
+
+            <section class="page-header">
+                <h1>Music Videos</h1>
+                <p>Music and creative video content from my YouTube channel.</p>
+            </section>
+
+            <section class="video-grid">
+
+                <% if (videos.length===0) { %>
+                    <p>No videos available.</p>
+                    <% } %>
+
+                        <% videos.forEach(video=> { %>
+                            <%- include('../partials/video-card', { video: video }) %>
+                                <% }) %>
+
+            </section>
+
+        </main>
+
+        <%- include('../partials/footer') %>

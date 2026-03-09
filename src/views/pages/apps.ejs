@@ -1,0 +1,25 @@
+<%- include('../partials/head') %>
+    <%- include('../partials/navbar') %>
+
+        <main class="page page-apps">
+
+            <section class="page-header">
+                <h1>Applications</h1>
+                <p>Software tools, utilities, and web applications I have built.</p>
+            </section>
+
+            <section class="project-grid">
+
+                <% if (projects.length===0) { %>
+                    <p>No applications available.</p>
+                    <% } %>
+
+                        <% projects.forEach(project=> { %>
+                            <%- include('../partials/project-card', { project: project }) %>
+                                <% }) %>
+
+            </section>
+
+        </main>
+
+        <%- include('../partials/footer') %>

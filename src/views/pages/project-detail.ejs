@@ -1,0 +1,56 @@
+<%- include('../partials/head') %>
+    <%- include('../partials/navbar') %>
+
+        <main class="page page-project-detail">
+
+            <section class="project-hero">
+
+                <h1>
+                    <%= project.title %>
+                </h1>
+
+                <% if (project.image) { %>
+                    <img src="/images/projects/<%= project.image %>" alt="<%= project.title %>" class="project-image">
+                    <% } %>
+
+                        <p class="project-summary">
+                            <%= project.description %>
+                        </p>
+
+            </section>
+
+
+            <section class="project-info">
+
+                <div class="project-meta">
+
+                    <p>
+                        <strong>Category:</strong>
+                        <%= project.category %>
+                    </p>
+
+                    <% if (project.github) { %>
+                        <p>
+                            <strong>GitHub:</strong>
+                            <a href="<%= project.github %>" target="_blank">
+                                View Repository
+                            </a>
+                        </p>
+                        <% } %>
+
+                            <% if (project.demo) { %>
+                                <p>
+                                    <strong>Live Demo:</strong>
+                                    <a href="<%= project.demo %>" target="_blank">
+                                        View Demo
+                                    </a>
+                                </p>
+                                <% } %>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <%- include('../partials/footer') %>

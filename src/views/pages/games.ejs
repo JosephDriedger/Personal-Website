@@ -1,0 +1,25 @@
+<%- include('../partials/head') %>
+    <%- include('../partials/navbar') %>
+
+        <main class="page page-games">
+
+            <section class="page-header">
+                <h1>Games</h1>
+                <p>Game development projects including engines, prototypes, and released titles.</p>
+            </section>
+
+            <section class="project-grid">
+
+                <% if (projects.length===0) { %>
+                    <p>No games available.</p>
+                    <% } %>
+
+                        <% projects.forEach(project=> { %>
+                            <%- include('../partials/project-card', { project: project }) %>
+                                <% }) %>
+
+            </section>
+
+        </main>
+
+        <%- include('../partials/footer') %>
