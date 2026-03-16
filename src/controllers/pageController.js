@@ -46,8 +46,12 @@ exports.about = (req, res) => {
   });
 };
 
-exports.contact = (req, res) => {
-  res.render("pages/contact", {
-    title: "Contact",
-  });
+exports.contact = (req, res) =>
+{
+    res.render("pages/contact", {
+        success: null,
+        errors: {},
+        form: {},
+        recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY || ""
+    });
 };

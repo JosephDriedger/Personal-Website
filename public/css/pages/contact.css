@@ -14,3 +14,63 @@
         grid-template-columns: 1fr;
     }
 }
+
+.contact-feedback {
+    display: none;
+    margin-bottom: 1rem;
+    padding: 0.85rem 1rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+}
+
+.contact-feedback.is-visible {
+    display: block;
+}
+
+.contact-feedback.is-success {
+    background: #e8f8ee;
+    border: 1px solid #7ecf9a;
+    color: #166534;
+}
+
+.contact-feedback.is-error {
+    background: #fdecec;
+    border: 1px solid #e5a4a4;
+    color: #991b1b;
+}
+
+.field-error {
+    display: block;
+    min-height: 1.2rem;
+    margin-top: 0.35rem;
+    color: #fca5a5;
+}
+
+.input-error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.12);
+}
+
+.hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+#contact-submit {
+    position: relative;
+}
+
+#contact-submit .btn-loading {
+    display: none;
+}
+
+#contact-submit.is-loading .btn-label {
+    display: none;
+}
+
+#contact-submit.is-loading .btn-loading {
+    display: inline;
+}

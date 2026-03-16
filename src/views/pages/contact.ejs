@@ -2,92 +2,79 @@
 <html lang="en">
 <%- include('../partials/head') %>
 
-<body>
-    <%- include('../partials/navbar') %>
+    <body>
+        <%- include('../partials/navbar') %>
 
-    <main class="container page page-contact">
-        <section class="contact-page reveal-on-scroll">
+            <main class="container page page-contact">
+                <section class="contact-page reveal-on-scroll">
+                    <div class="contact-copy">
+                        <span class="eyebrow">Contact</span>
+                        <h1>Let's build something great.</h1>
+                        <p>
+                            Reach out for collaboration, freelance work, project discussions, or creative opportunities.
+                        </p>
+                    </div>
 
-            <div class="contact-copy">
-                <span class="eyebrow">Contact</span>
-                <h1>Let's build something great.</h1>
-                <p>
-                    Reach out for collaboration, freelance work, project discussions, or creative opportunities.
-                </p>
-            </div>
+                    <div id="contact-feedback"
+                        class="contact-feedback <%= (success ? 'is-visible is-success' : ((errors && errors.general) ? 'is-visible is-error' : '')) %>"
+                        aria-live="polite">
+                        <%= success || (errors && errors.general) || '' %>
+                    </div>
 
-            <% if (success) { %>
-                <div class="form-success">
-                    <%= success %>
-                </div>
-            <% } %>
+                    <form method="POST" action="/contact" class="contact-form" id="contact-form" data-contact-form
+                        novalidate>
 
-            <% if (errors?.general) { %>
-                <div class="form-error">
-                    <%= errors.general %>
-                </div>
-            <% } %>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" value="<%= (form && form.name) || '' %>" required>
+                            <small class="field-error" data-error-for="name" aria-live="polite">
+                                <%= (errors && errors.name) || '' %>
+                            </small>
+                        </div>
 
-            <form method="POST" action="/contact" class="contact-form" novalidate>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" value="<%= (form && form.email) || '' %>"
+                                required>
+                            <small class="field-error" data-error-for="email" aria-live="polite">
+                                <%= (errors && errors.email) || '' %>
+                            </small>
+                        </div>
 
-                <div class="form-group">
-                    <label for="name">Name</label>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="6"
+                                required><%= (form && form.message) || '' %></textarea>
+                            <small class="field-error" data-error-for="message" aria-live="polite">
+                                <%= (errors && errors.message) || '' %>
+                            </small>
+                        </div>
 
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value="<%= form?.name || '' %>"
-                        required
-                    >
+                        <div class="hp-field" aria-hidden="true">
+                            <label for="website">Leave this field empty</label>
+                            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
 
-                    <small class="field-error" aria-live="polite">
-                        <%= errors?.name || '' %>
-                    </small>
-                </div>
+                        <div class="form-group">
+                            <div class="g-recaptcha" data-sitekey="<%= recaptchaSiteKey || '' %>"></div>
+                            <small class="field-error" data-error-for="g-recaptcha-response" aria-live="polite"></small>
+                        </div>
 
-                <div class="form-group">
-                    <label for="email">Email</label>
+                        <button type="submit" class="btn btn-primary" id="contact-submit">
+                            <span class="btn-label">Send Message</span>
+                            <span class="btn-loading" aria-hidden="true">Sending...</span>
+                        </button>
 
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value="<%= form?.email || '' %>"
-                        required
-                    >
+                    </form>
+                </section>
+            </main>
 
-                    <small class="field-error" aria-live="polite">
-                        <%= errors?.email || '' %>
-                    </small>
-                </div>
+            <%- include('../partials/footer') %>
 
-                <div class="form-group">
-                    <label for="message">Message</label>
+                <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                <script src="/js/main.js"></script>
+                <script src="/js/nav.js"></script>
+                <script src="/js/contact.js"></script>
+    </body>
 
-                    <textarea
-                        id="message"
-                        name="message"
-                        rows="6"
-                        required
-                    ><%= form?.message || '' %></textarea>
-
-                    <small class="field-error" aria-live="polite">
-                        <%= errors?.message || '' %>
-                    </small>
-                </div>
-
-                <button type="submit" class="btn btn-primary" id="contact-submit">
-                    Send Message
-                </button>
-            </form>
-        </section>
-    </main>
-
-    <%- include('../partials/footer') %>
-
-    <script src="/js/main.js"></script>
-    <script src="/js/nav.js"></script>
-    <script src="/js/contact.js"></script>
-</body>
 </html>
