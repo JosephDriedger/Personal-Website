@@ -1,4 +1,5 @@
 const db = require("../config/db");
+const { extractYouTubeId, buildEmbedUrl } = require("../utils/youtube");
 
 const devMode = process.env.DEV_MODE === "true";
 
@@ -23,16 +24,44 @@ const mockVideos = [
     }
 ];
 
+function normalizeVideo(video)
+{
+    const youtubeId = extractYouTubeId(
+        video.youtube_id ||
+        video.video_id ||
+        video.youtube_url ||
+        video.url
+    );
+
+    return {
+        id: video.id,
+        title: video.title || "Untitled Video",
+        description: video.description || "",
+        youtube_id: youtubeId,
+        embed_url: buildEmbedUrl(youtubeId),
+        created_at: video.created_at || null
+    };
+}
+
 exports.findAll = async () =>
 {
     if (devMode)
     {
-        return mockVideos;
+        return mockVideos.map(normalizeVideo);
     }
 
-    const [rows] = await db.query(
-        "SELECT * FROM videos ORDER BY created_at DESC"
-    );
+    const [rows] = await db.query(`
+        SELECT
+            id,
+            title,
+            video_id,
+            NULL AS description,
+            created_at
+        FROM videos
+        ORDER BY created_at DESC, id DESC
+    `);
 
-    return rows;
+    return rows
+        .map(normalizeVideo)
+        .filter((video) => Boolean(video.youtube_id));
 };

@@ -1,13 +1,26 @@
 <article class="video-card reveal-on-scroll">
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/<%= video.youtube_id %>" title="<%= video.title %>" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-        </iframe>
-    </div>
+    <% if (video.youtube_id) { %>
+        <div class="video-container">
+            <iframe
+                src="<%= video.embed_url || ('https://www.youtube.com/embed/' + video.youtube_id) %>"
+                title="<%= video.title %>"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+            </iframe>
+        </div>
+    <% } else { %>
+        <div class="video-container video-container-placeholder">
+            <div class="project-thumbnail-placeholder">Video unavailable</div>
+        </div>
+    <% } %>
 
     <div class="video-info">
         <h3><%= video.title %></h3>
-        <p><%= video.description || 'No description available.' %></p>
+
+        <% if (video.description) { %>
+            <p><%= video.description %></p>
+        <% } %>
     </div>
 </article>
