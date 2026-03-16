@@ -4,6 +4,7 @@ const path = require("path");
 const indexRoutes = require("./routes/index");
 const projectRoutes = require("./routes/projects");
 const videoRoutes = require("./routes/videos");
+const contactRoutes = require("./routes/contactRoutes");
 
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
@@ -33,6 +34,7 @@ Routes
 app.use("/", indexRoutes);
 app.use("/projects", projectRoutes);
 app.use("/videos", videoRoutes);
+app.use("/", contactRoutes);
 
 /*
 Errors

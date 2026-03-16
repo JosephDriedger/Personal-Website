@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('../partials/head') %>
+
 <body>
     <%- include('../partials/navbar') %>
 
     <main class="container page page-contact">
         <section class="contact-page reveal-on-scroll">
+
             <div class="contact-copy">
                 <span class="eyebrow">Contact</span>
                 <h1>Let's build something great.</h1>
@@ -14,26 +16,70 @@
                 </p>
             </div>
 
+            <% if (success) { %>
+                <div class="form-success">
+                    <%= success %>
+                </div>
+            <% } %>
+
+            <% if (errors?.general) { %>
+                <div class="form-error">
+                    <%= errors.general %>
+                </div>
+            <% } %>
+
             <form method="POST" action="/contact" class="contact-form" novalidate>
+
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
-                    <small class="field-error" aria-live="polite"></small>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value="<%= form?.name || '' %>"
+                        required
+                    >
+
+                    <small class="field-error" aria-live="polite">
+                        <%= errors?.name || '' %>
+                    </small>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                    <small class="field-error" aria-live="polite"></small>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value="<%= form?.email || '' %>"
+                        required
+                    >
+
+                    <small class="field-error" aria-live="polite">
+                        <%= errors?.email || '' %>
+                    </small>
                 </div>
 
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="6" required></textarea>
-                    <small class="field-error" aria-live="polite"></small>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="6"
+                        required
+                    ><%= form?.message || '' %></textarea>
+
+                    <small class="field-error" aria-live="polite">
+                        <%= errors?.message || '' %>
+                    </small>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Send Message</button>
+                <button type="submit" class="btn btn-primary" id="contact-submit">
+                    Send Message
+                </button>
             </form>
         </section>
     </main>
@@ -42,5 +88,6 @@
 
     <script src="/js/main.js"></script>
     <script src="/js/nav.js"></script>
+    <script src="/js/contact.js"></script>
 </body>
 </html>
