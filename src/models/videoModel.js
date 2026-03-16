@@ -57,7 +57,7 @@ exports.findAll = async () =>
             video_id,
             NULL AS description,
             created_at
-        FROM videos
+        FROM VIDEOS
         ORDER BY created_at DESC, id DESC
     `);
 

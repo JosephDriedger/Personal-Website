@@ -52,7 +52,7 @@ exports.findAll = async () =>
         return mockProjects;
     }
 
-    const [rows] = await db.query("SELECT * FROM projects");
+    const [rows] = await db.query("SELECT * FROM PROJECTS");
     return rows;
 };
 
@@ -64,7 +64,7 @@ exports.findByType = async (type) =>
     }
 
     const [rows] = await db.query(
-        "SELECT * FROM projects WHERE type = ?",
+        "SELECT * FROM PROJECTS WHERE type = ?",
         [type]
     );
 
@@ -79,7 +79,7 @@ exports.findById = async (id) =>
     }
 
     const [rows] = await db.query(
-        "SELECT * FROM projects WHERE id = ?",
+        "SELECT * FROM PROJECTS WHERE id = ?",
         [id]
     );
 

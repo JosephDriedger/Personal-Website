@@ -1,18 +1,21 @@
-const devMode = process.env.DEV_MODE === "true";
+const mysql = require("mysql2/promise");
 
-if (devMode)
+const isDevelopment = process.env.NODE_ENV === "development";
+const allowDevDb = process.env.ALLOW_DEV_DB === "true";
+
+if (isDevelopment && !allowDevDb)
 {
     module.exports = {
         query: async () =>
         {
-            throw new Error("Database query attempted while DEV_MODE=true.");
+            throw new Error(
+                "Database query attempted while NODE_ENV=development and ALLOW_DEV_DB is not true."
+            );
         }
     };
 
     return;
 }
-
-const mysql = require("mysql2/promise");
 
 const pool = mysql.createPool(
 {
@@ -22,7 +25,7 @@ const pool = mysql.createPool(
     password: process.env.DB_PASSWORD || "",
     database: process.env.DB_NAME || "PERSONAL_WEBSITE",
     waitForConnections: true,
-    connectionLimit: 10,
+    connectionLimit: 10
 });
 
 module.exports = pool;
