@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     const projectGrid = document.querySelector("#project-grid");
     const searchInput = document.querySelector("#project-search");
+    const technologyFilter = document.querySelector("#project-technology-filter");
     const filterButtons = document.querySelectorAll(".filter-btn");
     const emptyMessage = document.querySelector("#project-empty-message");
 
-    if (!projectGrid || !searchInput || filterButtons.length === 0) {
+    if (!projectGrid || !searchInput || !technologyFilter || filterButtons.length === 0) {
         return;
     }
 
@@ -13,16 +14,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const applyFilters = () => {
         const query = searchInput.value.trim().toLowerCase();
+        const activeTechnology = technologyFilter.value;
         let visibleCount = 0;
 
         projectCards.forEach((card) => {
             const title = card.dataset.title || "";
             const category = card.dataset.category || "";
             const type = card.dataset.type || "";
+            const technologies = card.dataset.technologies || "";
 
-            const matchesFilter = activeFilter === "all" || category.includes(activeFilter) || type.includes(activeFilter);
-            const matchesSearch = !query || title.includes(query) || category.includes(query) || type.includes(query);
-            const shouldShow = matchesFilter && matchesSearch;
+            const matchesFilter =
+                activeFilter === "all" ||
+                category.includes(activeFilter) ||
+                type.includes(activeFilter);
+
+            const matchesTechnology =
+                activeTechnology === "all" ||
+                technologies.split(" ").includes(activeTechnology);
+
+            const matchesSearch =
+                !query ||
+                title.includes(query) ||
+                category.includes(query) ||
+                type.includes(query) ||
+                technologies.includes(query);
+
+            const shouldShow = matchesFilter && matchesTechnology && matchesSearch;
 
             card.classList.toggle("hidden", !shouldShow);
 
@@ -46,4 +63,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     searchInput.addEventListener("input", applyFilters);
+    technologyFilter.addEventListener("change", applyFilters);
 });

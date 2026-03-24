@@ -1,4 +1,10 @@
-<article class="project-card" data-category="<%= (project.category || '').toLowerCase() %>" data-title="<%= (project.title || '').toLowerCase() %>" data-type="<%= (project.type || project.category || '').toLowerCase() %>">
+<article
+    class="project-card"
+    data-category="<%= (project.category || '').toLowerCase() %>"
+    data-title="<%= (project.title || '').toLowerCase() %>"
+    data-type="<%= (project.type || project.category || '').toLowerCase() %>"
+    data-technologies="<%= (project.technologies || []).map((technology) => technology.toLowerCase()).join(' ') %>"
+>
     <a href="/projects/<%= project.id %>" class="project-card-link">
         <% if (project.image) { %>
             <img src="/images/projects/<%= project.image %>" alt="<%= project.title %>" class="project-thumbnail">

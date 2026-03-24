@@ -228,6 +228,25 @@
     border-color: rgba(124, 156, 255, 0.4);
 }
 
+/* Fix dropdown styling */
+#project-technology-filter {
+    background-color: #0f172a;   /* dark background */
+    color: #ffffff;              /* white text */
+    border: 1px solid #334155;
+}
+
+/* Dropdown options */
+#project-technology-filter option {
+    background-color: #0f172a;
+    color: #ffffff;
+}
+
+/* Optional: hover/active feel (browser-dependent) */
+#project-technology-filter option:checked {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+
 .contact-form {
     display: grid;
     gap: 1rem;

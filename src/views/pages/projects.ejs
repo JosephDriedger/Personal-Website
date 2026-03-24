@@ -11,15 +11,32 @@
             <p>Browse development work across software, tools, game systems, and creative projects.</p>
         </section>
 
+        <%
+            const technologies = Array.from(
+                new Set(
+                    (projects || []).flatMap((project) => project.technologies || [])
+                )
+            ).sort((a, b) => a.localeCompare(b));
+        %>
+
         <section class="filter-bar reveal-on-scroll">
             <div class="filter-search-wrap">
-                <input type="search" id="project-search" class="filter-search" placeholder="Search projects by title or category">
+                <input type="search" id="project-search" class="filter-search" placeholder="Search projects by title, category, or technology">
             </div>
 
             <div class="filter-buttons">
                 <button class="filter-btn is-active" type="button" data-filter="all">All</button>
                 <button class="filter-btn" type="button" data-filter="game">Games</button>
                 <button class="filter-btn" type="button" data-filter="app">Apps</button>
+            </div>
+
+            <div class="filter-search-wrap">
+                <select id="project-technology-filter" class="filter-search" aria-label="Filter projects by technology">
+                    <option value="all">All Technologies</option>
+                    <% technologies.forEach((technology) => { %>
+                        <option value="<%= technology.toLowerCase() %>"><%= technology %></option>
+                    <% }) %>
+                </select>
             </div>
         </section>
 

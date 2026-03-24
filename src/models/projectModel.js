@@ -13,7 +13,8 @@ const mockProjects = [
         type: "game",
         image: "",
         github: "https://github.com/JosephDriedger/echoes-of-the-forgotten-keep",
-        demo: ""
+        demo: "",
+        technologies: ["C++", "CMake", "SDL3", "OpenGL", "GLM"]
     },
     {
         id: 2,
@@ -23,7 +24,8 @@ const mockProjects = [
         type: "game",
         image: "",
         github: "",
-        demo: ""
+        demo: "",
+        technologies: ["Unity", "C#", "Blender"]
     },
     {
         id: 3,
@@ -33,7 +35,8 @@ const mockProjects = [
         type: "app",
         image: "",
         github: "",
-        demo: ""
+        demo: "",
+        technologies: ["Node.js", "Express", "EJS", "JavaScript", "CSS", "MySQL"]
     },
     {
         id: 4,
@@ -43,106 +46,114 @@ const mockProjects = [
         type: "app",
         image: "",
         github: "",
-        demo: ""
+        demo: "",
+        technologies: ["Node.js", "Express", "EJS", "JavaScript", "CSS", "MySQL"]
     }
 ];
+
+const projectSelect = `
+    SELECT
+        P.ID AS id,
+        P.TITLE AS title,
+        P.SLUG AS slug,
+        P.SHORT_DESCRIPTION AS shortDescription,
+        P.DESCRIPTION AS description,
+        P.CATEGORY AS category,
+        P.TYPE AS type,
+        P.ROLE AS role,
+        P.STATUS AS status,
+        P.START_DATE AS startDate,
+        P.END_DATE AS endDate,
+        P.GITHUB_URL AS github,
+        P.DEMO_URL AS demo,
+        P.WEBSITE_URL AS website,
+        P.IMAGE_URL AS image,
+        TECH.technologies AS technologies
+    FROM PROJECTS P
+    LEFT JOIN (
+        SELECT
+            PROJECT_ID,
+            GROUP_CONCAT(TECH_NAME ORDER BY DISPLAY_ORDER ASC SEPARATOR '||') AS technologies
+        FROM PROJECT_TECH
+        GROUP BY PROJECT_ID
+    ) TECH
+        ON TECH.PROJECT_ID = P.ID
+`;
+
+const normalizeProject = (project) =>
+{
+    if (!project)
+    {
+        return null;
+    }
+
+    const technologies = Array.isArray(project.technologies)
+        ? project.technologies
+        : String(project.technologies || "")
+            .split("||")
+            .map((tech) => tech.trim())
+            .filter(Boolean);
+
+    return {
+        ...project,
+        technologies
+    };
+};
+
+const normalizeProjects = (projects) => projects.map(normalizeProject);
 
 exports.findAll = async () =>
 {
     if (useMockData)
     {
-        return mockProjects;
+        return normalizeProjects(mockProjects);
     }
 
     const [rows] = await db.query(`
-        SELECT
-            ID AS id,
-            TITLE AS title,
-            SLUG AS slug,
-            SHORT_DESCRIPTION AS shortDescription,
-            DESCRIPTION AS description,
-            CATEGORY AS category,
-            TYPE AS type,
-            ROLE AS role,
-            STATUS AS status,
-            START_DATE AS startDate,
-            END_DATE AS endDate,
-            GITHUB_URL AS github,
-            DEMO_URL AS demo,
-            WEBSITE_URL AS website,
-            IMAGE_URL AS image
-        FROM PROJECTS
-        ORDER BY DISPLAY_ORDER ASC, START_DATE DESC, ID DESC
+        ${projectSelect}
+        ORDER BY P.DISPLAY_ORDER ASC, P.START_DATE DESC, P.ID DESC
     `);
 
-    return rows;
+    return normalizeProjects(rows);
 };
 
 exports.findByType = async (type) =>
 {
     if (useMockData)
     {
-        return mockProjects.filter((project) => project.type === type);
+        return normalizeProjects(
+            mockProjects.filter((project) => project.type === type)
+        );
     }
 
     const [rows] = await db.query(
         `
-        SELECT
-            ID AS id,
-            TITLE AS title,
-            SLUG AS slug,
-            SHORT_DESCRIPTION AS shortDescription,
-            DESCRIPTION AS description,
-            CATEGORY AS category,
-            TYPE AS type,
-            ROLE AS role,
-            STATUS AS status,
-            START_DATE AS startDate,
-            END_DATE AS endDate,
-            GITHUB_URL AS github,
-            DEMO_URL AS demo,
-            WEBSITE_URL AS website,
-            IMAGE_URL AS image
-        FROM PROJECTS
-        WHERE TYPE = ?
-        ORDER BY DISPLAY_ORDER ASC, START_DATE DESC, ID DESC
+        ${projectSelect}
+        WHERE LOWER(P.TYPE) = LOWER(?)
+        ORDER BY P.DISPLAY_ORDER ASC, P.START_DATE DESC, P.ID DESC
         `,
         [type]
     );
 
-    return rows;
+    return normalizeProjects(rows);
 };
 
 exports.findById = async (id) =>
 {
     if (useMockData)
     {
-        return mockProjects.find((project) => String(project.id) === String(id)) || null;
+        return normalizeProject(
+            mockProjects.find((project) => String(project.id) === String(id)) || null
+        );
     }
 
     const [rows] = await db.query(
         `
-        SELECT
-            ID AS id,
-            TITLE AS title,
-            SLUG AS slug,
-            SHORT_DESCRIPTION AS shortDescription,
-            DESCRIPTION AS description,
-            CATEGORY AS category,
-            TYPE AS type,
-            ROLE AS role,
-            STATUS AS status,
-            START_DATE AS startDate,
-            END_DATE AS endDate,
-            GITHUB_URL AS github,
-            DEMO_URL AS demo,
-            WEBSITE_URL AS website,
-            IMAGE_URL AS image
-        FROM PROJECTS
-        WHERE ID = ?
+        ${projectSelect}
+        WHERE P.ID = ?
         `,
         [id]
     );
 
-    return rows[0] || null;
+    return normalizeProject(rows[0] || null);
 };
