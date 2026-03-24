@@ -1,7 +1,9 @@
 const db = require("../config/db");
 const { extractYouTubeId, buildEmbedUrl } = require("../utils/youtube");
 
-const devMode = process.env.DEV_MODE === "true";
+const useMockData =
+    process.env.NODE_ENV === "development" &&
+    process.env.ALLOW_DEV_DB !== "true";
 
 const mockVideos = [
     {
@@ -45,7 +47,7 @@ function normalizeVideo(video)
 
 exports.findAll = async () =>
 {
-    if (devMode)
+    if (useMockData)
     {
         return mockVideos.map(normalizeVideo);
     }

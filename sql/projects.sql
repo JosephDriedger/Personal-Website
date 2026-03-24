@@ -207,6 +207,7 @@ VALUES (
         FALSE,
         9
     );
+    
 INSERT INTO PROJECT_TECH (PROJECT_ID, TECH_NAME, DISPLAY_ORDER)
 VALUES (1, 'Unity', 1),
     (1, 'C#', 2),

@@ -1,6 +1,8 @@
 const db = require("../config/db");
 
-const devMode = process.env.DEV_MODE === "true";
+const useMockData =
+    process.env.NODE_ENV === "development" &&
+    process.env.ALLOW_DEV_DB !== "true";
 
 const mockProjects = [
     {
@@ -47,24 +49,64 @@ const mockProjects = [
 
 exports.findAll = async () =>
 {
-    if (devMode)
+    if (useMockData)
     {
         return mockProjects;
     }
 
-    const [rows] = await db.query("SELECT * FROM PROJECTS");
+    const [rows] = await db.query(`
+        SELECT
+            ID AS id,
+            TITLE AS title,
+            SLUG AS slug,
+            SHORT_DESCRIPTION AS shortDescription,
+            DESCRIPTION AS description,
+            CATEGORY AS category,
+            TYPE AS type,
+            ROLE AS role,
+            STATUS AS status,
+            START_DATE AS startDate,
+            END_DATE AS endDate,
+            GITHUB_URL AS github,
+            DEMO_URL AS demo,
+            WEBSITE_URL AS website,
+            IMAGE_URL AS image
+        FROM PROJECTS
+        ORDER BY DISPLAY_ORDER ASC, START_DATE DESC, ID DESC
+    `);
+
     return rows;
 };
 
 exports.findByType = async (type) =>
 {
-    if (devMode)
+    if (useMockData)
     {
         return mockProjects.filter((project) => project.type === type);
     }
 
     const [rows] = await db.query(
-        "SELECT * FROM PROJECTS WHERE type = ?",
+        `
+        SELECT
+            ID AS id,
+            TITLE AS title,
+            SLUG AS slug,
+            SHORT_DESCRIPTION AS shortDescription,
+            DESCRIPTION AS description,
+            CATEGORY AS category,
+            TYPE AS type,
+            ROLE AS role,
+            STATUS AS status,
+            START_DATE AS startDate,
+            END_DATE AS endDate,
+            GITHUB_URL AS github,
+            DEMO_URL AS demo,
+            WEBSITE_URL AS website,
+            IMAGE_URL AS image
+        FROM PROJECTS
+        WHERE TYPE = ?
+        ORDER BY DISPLAY_ORDER ASC, START_DATE DESC, ID DESC
+        `,
         [type]
     );
 
@@ -73,13 +115,32 @@ exports.findByType = async (type) =>
 
 exports.findById = async (id) =>
 {
-    if (devMode)
+    if (useMockData)
     {
         return mockProjects.find((project) => String(project.id) === String(id)) || null;
     }
 
     const [rows] = await db.query(
-        "SELECT * FROM PROJECTS WHERE id = ?",
+        `
+        SELECT
+            ID AS id,
+            TITLE AS title,
+            SLUG AS slug,
+            SHORT_DESCRIPTION AS shortDescription,
+            DESCRIPTION AS description,
+            CATEGORY AS category,
+            TYPE AS type,
+            ROLE AS role,
+            STATUS AS status,
+            START_DATE AS startDate,
+            END_DATE AS endDate,
+            GITHUB_URL AS github,
+            DEMO_URL AS demo,
+            WEBSITE_URL AS website,
+            IMAGE_URL AS image
+        FROM PROJECTS
+        WHERE ID = ?
+        `,
         [id]
     );
 

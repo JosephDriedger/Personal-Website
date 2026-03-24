@@ -43,6 +43,12 @@ exports.getProjectDetail = async (req, res, next) => {
   try {
     const project = await projectService.getProjectById(req.params.id);
 
+    if (!project) {
+      return res.status(404).render("pages/404", {
+        title: "Not Found",
+      });
+    }
+
     res.render("pages/project-detail", {
       title: project.title,
       project,
