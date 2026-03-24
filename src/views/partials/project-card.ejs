@@ -1,9 +1,33 @@
+<%
+    const technologyList = Array.isArray(project.technologies)
+        ? project.technologies
+            .map((technology) => String(technology || "").trim().toLowerCase())
+            .filter(Boolean)
+        : typeof project.technologies === "string"
+            ? project.technologies
+                .split(",")
+                .map((technology) => technology.trim().toLowerCase())
+                .filter(Boolean)
+            : [];
+
+    const technologyDisplayList = Array.isArray(project.technologies)
+        ? project.technologies
+            .map((technology) => String(technology || "").trim())
+            .filter(Boolean)
+        : typeof project.technologies === "string"
+            ? project.technologies
+                .split(",")
+                .map((technology) => technology.trim())
+                .filter(Boolean)
+            : [];
+%>
+
 <article
     class="project-card"
     data-category="<%= (project.category || '').toLowerCase() %>"
     data-title="<%= (project.title || '').toLowerCase() %>"
     data-type="<%= (project.type || project.category || '').toLowerCase() %>"
-    data-technologies="<%= (project.technologies || []).map((technology) => technology.toLowerCase()).join(' ') %>"
+    data-technologies="<%= technologyList.join('|') %>"
 >
     <a href="/projects/<%= project.id %>" class="project-card-link">
         <% if (project.image) { %>
@@ -24,6 +48,14 @@
             <p class="project-description">
                 <%= (project.description && project.description.length > 120) ? `${project.description.substring(0, 120)}...` : (project.description || 'No description available yet.') %>
             </p>
+
+            <% if (technologyDisplayList.length) { %>
+                <div class="project-tech-list">
+                    <% technologyDisplayList.forEach((technology) => { %>
+                        <span class="project-tech-pill"><%= technology %></span>
+                    <% }) %>
+                </div>
+            <% } %>
 
             <span class="project-link-text">View details</span>
         </div>

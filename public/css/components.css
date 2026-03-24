@@ -155,6 +155,25 @@
     color: var(--text-soft);
 }
 
+.project-tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.project-tech-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(124, 156, 255, 0.28);
+    background: rgba(124, 156, 255, 0.12);
+    color: #dbe6ff;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
 .project-link-text {
     display: inline-flex;
     margin-top: 1rem;
@@ -192,6 +211,13 @@
     flex: 1;
 }
 
+.filter-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
 .filter-search,
 .contact-form input,
 .contact-form textarea {
@@ -207,6 +233,81 @@
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
     color: #8b96bc;
+}
+
+.custom-select {
+    position: relative;
+    min-width: 240px;
+}
+
+.custom-select-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.95rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+}
+
+.custom-select-trigger:focus-visible,
+.custom-select-option:focus-visible,
+.filter-btn:focus-visible,
+.filter-search:focus-visible,
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+    outline: 2px solid rgba(124, 156, 255, 0.65);
+    outline-offset: 2px;
+}
+
+.custom-select.is-open .custom-select-trigger {
+    border-color: rgba(124, 156, 255, 0.5);
+}
+
+.custom-select-chevron {
+    font-size: 0.8rem;
+    transition: transform 0.2s ease;
+}
+
+.custom-select.is-open .custom-select-chevron {
+    transform: rotate(180deg);
+}
+
+.custom-select-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    z-index: 50;
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #0b1530;
+    box-shadow: var(--shadow);
+}
+
+.custom-select-option {
+    width: 100%;
+    display: block;
+    padding: 0.8rem 0.85rem;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+}
+
+.custom-select-option:hover,
+.custom-select-option.is-selected {
+    background: rgba(124, 156, 255, 0.22);
 }
 
 .filter-buttons {
@@ -226,25 +327,6 @@
 .filter-btn.is-active {
     background: rgba(124, 156, 255, 0.18);
     border-color: rgba(124, 156, 255, 0.4);
-}
-
-/* Fix dropdown styling */
-#project-technology-filter {
-    background-color: #0f172a;   /* dark background */
-    color: #ffffff;              /* white text */
-    border: 1px solid #334155;
-}
-
-/* Dropdown options */
-#project-technology-filter option {
-    background-color: #0f172a;
-    color: #ffffff;
-}
-
-/* Optional: hover/active feel (browser-dependent) */
-#project-technology-filter option:checked {
-    background-color: #2563eb;
-    color: #ffffff;
 }
 
 .contact-form {
@@ -280,6 +362,10 @@
     text-align: center;
 }
 
+.hidden {
+    display: none !important;
+}
+
 @media (max-width: 1024px) {
     .project-grid,
     .video-grid {
@@ -297,5 +383,14 @@
     .filter-bar {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .filter-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .custom-select {
+        min-width: 100%;
     }
 }

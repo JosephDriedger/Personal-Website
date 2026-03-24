@@ -4,6 +4,29 @@
 <body>
     <%- include('../partials/navbar') %>
 
+    <%
+        const technologies = Array.from(
+            new Set(
+                (projects || []).flatMap((project) => {
+                    if (Array.isArray(project.technologies)) {
+                        return project.technologies
+                            .map((technology) => String(technology || "").trim())
+                            .filter(Boolean);
+                    }
+
+                    if (typeof project.technologies === "string") {
+                        return project.technologies
+                            .split(",")
+                            .map((technology) => technology.trim())
+                            .filter(Boolean);
+                    }
+
+                    return [];
+                })
+            )
+        ).sort((a, b) => a.localeCompare(b));
+    %>
+
     <main class="container page page-projects">
         <section class="page-header reveal-on-scroll">
             <span class="eyebrow">Projects</span>
@@ -11,32 +34,54 @@
             <p>Browse development work across software, tools, game systems, and creative projects.</p>
         </section>
 
-        <%
-            const technologies = Array.from(
-                new Set(
-                    (projects || []).flatMap((project) => project.technologies || [])
-                )
-            ).sort((a, b) => a.localeCompare(b));
-        %>
-
         <section class="filter-bar reveal-on-scroll">
             <div class="filter-search-wrap">
                 <input type="search" id="project-search" class="filter-search" placeholder="Search projects by title, category, or technology">
             </div>
 
-            <div class="filter-buttons">
-                <button class="filter-btn is-active" type="button" data-filter="all">All</button>
-                <button class="filter-btn" type="button" data-filter="game">Games</button>
-                <button class="filter-btn" type="button" data-filter="app">Apps</button>
-            </div>
+            <div class="filter-controls">
+                <div class="custom-select" id="project-technology-select" data-selected="all">
+                    <button
+                        type="button"
+                        class="custom-select-trigger"
+                        id="project-technology-trigger"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                    >
+                        <span class="custom-select-label">All Technologies</span>
+                        <span class="custom-select-chevron" aria-hidden="true">&#9662;</span>
+                    </button>
 
-            <div class="filter-search-wrap">
-                <select id="project-technology-filter" class="filter-search" aria-label="Filter projects by technology">
-                    <option value="all">All Technologies</option>
-                    <% technologies.forEach((technology) => { %>
-                        <option value="<%= technology.toLowerCase() %>"><%= technology %></option>
-                    <% }) %>
-                </select>
+                    <div class="custom-select-menu hidden" id="project-technology-menu" role="listbox" aria-label="Filter by technology">
+                        <button
+                            type="button"
+                            class="custom-select-option is-selected"
+                            data-value="all"
+                            role="option"
+                            aria-selected="true"
+                        >
+                            All Technologies
+                        </button>
+
+                        <% technologies.forEach((technology) => { %>
+                            <button
+                                type="button"
+                                class="custom-select-option"
+                                data-value="<%= technology.toLowerCase() %>"
+                                role="option"
+                                aria-selected="false"
+                            >
+                                <%= technology %>
+                            </button>
+                        <% }) %>
+                    </div>
+                </div>
+
+                <div class="filter-buttons">
+                    <button class="filter-btn is-active" type="button" data-filter="all">All</button>
+                    <button class="filter-btn" type="button" data-filter="game">Games</button>
+                    <button class="filter-btn" type="button" data-filter="app">Apps</button>
+                </div>
             </div>
         </section>
 
