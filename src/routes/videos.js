@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const videoController = require("../controllers/videoController");
+const pageController = require("../controllers/pageController");
 
-router.get("/", videoController.getVideos);
+router.get("/", pageController.musicVideos);
 
 module.exports = router;

@@ -1,4 +1,4 @@
-<article class="video-card reveal-on-scroll">
+<article class="video-card reveal-on-scroll" data-title="<%= (video.title || '').toLowerCase() %>">
     <% if (video.youtube_id) { %>
         <div class="video-container">
             <iframe

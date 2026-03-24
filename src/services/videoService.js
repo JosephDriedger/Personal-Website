@@ -1,6 +1,5 @@
-const videoModel = require("../models/videoModel");
+const videoModel = require('../models/videoModel');
 
-exports.getAllVideos = async () =>
-{
-    return await videoModel.findAll();
+exports.getAllVideos = async (filters) => {
+    return await videoModel.findAll(filters);
 };

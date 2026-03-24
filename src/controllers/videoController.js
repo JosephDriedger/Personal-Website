@@ -1,14 +1,19 @@
-const videoService = require("../services/videoService");
+const videoService = require('../services/videoService');
 
-exports.getVideos = async (req, res, next) => {
-  try {
-    const videos = await videoService.getAllVideos();
+exports.getAllVideos = async (req, res) => {
+    try {
+        const filters = {
+            title: req.query.title || ''
+        };
 
-    res.render("pages/music-videos", {
-      title: "Music Videos",
-      videos,
-    });
-  } catch (error) {
-    next(error);
-  }
+        const videos = await videoService.getAllVideos(filters);
+
+        res.render('videos', { 
+            videos,
+            filters
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
 };

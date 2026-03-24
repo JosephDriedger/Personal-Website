@@ -11,7 +11,13 @@
             <p>Music and visual work featured from my YouTube content.</p>
         </section>
 
-        <section class="video-grid">
+        <section class="filter-bar reveal-on-scroll">
+            <div class="filter-search-wrap">
+                <input type="search" id="video-search" class="filter-search" placeholder="Search videos by title">
+            </div>
+        </section>
+
+        <section class="video-grid" id="video-grid">
             <% if (videos && videos.length) { %>
                 <% videos.forEach(video => { %>
                     <%- include('../partials/video-card', { video: video }) %>
@@ -20,11 +26,14 @@
                 <p class="empty-state">No videos available.</p>
             <% } %>
         </section>
+
+        <p id="video-empty-message" class="empty-state hidden">No videos match your current filter.</p>
     </main>
 
     <%- include('../partials/footer') %>
 
     <script src="/js/main.js"></script>
     <script src="/js/nav.js"></script>
+    <script src="/js/video-filters.js"></script>
 </body>
 </html>
