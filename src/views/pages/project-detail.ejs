@@ -21,18 +21,28 @@
             <div class="project-meta detail-card">
                 <p><strong>Category:</strong> <%= project.category || 'Project' %></p>
 
+                <% if (project.role) { %>
+                    <p><strong>Role:</strong> <%= project.role %></p>
+                <% } %>
+            </div>
+
+            <div class="project-links">
                 <% if (project.github) { %>
-                    <p>
-                        <strong>GitHub:</strong>
-                        <a href="<%= project.github %>" target="_blank" rel="noreferrer">View Repository</a>
-                    </p>
+                    <a href="<%= project.github %>" target="_blank" rel="noreferrer" class="btn btn-secondary">
+                        GitHub Repository
+                    </a>
                 <% } %>
 
                 <% if (project.demo) { %>
-                    <p>
-                        <strong>Live Demo:</strong>
-                        <a href="<%= project.demo %>" target="_blank" rel="noreferrer">View Demo</a>
-                    </p>
+                    <a href="<%= project.demo %>" target="_blank" rel="noreferrer" class="btn btn-primary">
+                        View Release
+                    </a>
+                <% } %>
+
+                <% if (project.website) { %>
+                    <a href="<%= project.website %>" target="_blank" rel="noreferrer" class="btn btn-primary">
+                        Visit Website
+                    </a>
                 <% } %>
             </div>
         </section>

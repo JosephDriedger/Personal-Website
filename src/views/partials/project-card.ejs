@@ -29,7 +29,7 @@
     data-type="<%= (project.type || project.category || '').toLowerCase() %>"
     data-technologies="<%= technologyList.join('|') %>"
 >
-    <a href="/projects/<%= project.id %>" class="project-card-link">
+    <a href="/projects/<%= project.slug %>" class="project-card-link">
         <% if (project.image) { %>
             <img src="/images/projects/<%= project.image %>" alt="<%= project.title %>" class="project-thumbnail">
         <% } else { %>

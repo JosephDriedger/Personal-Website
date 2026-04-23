@@ -7,47 +7,51 @@ const useMockData =
 const mockProjects = [
     {
         id: 1,
-        title: "Echoes of the Forgotten Keep",
-        description: "A custom C++ dungeon game project built with a custom engine.",
-        category: "Game",
-        type: "game",
-        image: "",
-        github: "https://github.com/JosephDriedger/echoes-of-the-forgotten-keep",
-        demo: "",
-        technologies: ["C++", "CMake", "SDL3", "OpenGL", "GLM"]
+        slug: "joseph-driedger-personal-website",
+        title: "Joseph Driedger Personal Website",
+        shortDescription: "Personal portfolio website built with Node.js, Express, EJS, and MySQL.",
+        description: "A personal portfolio website for showcasing projects, technical skills, and professional experience. Built with a Node.js and Express backend, EJS templating, and a MySQL database. Features a responsive design with project filtering by category and technology, a contact form with reCAPTCHA protection, and dynamic project detail pages.",
+        category: "Personal",
+        type: "website",
+        role: "Developer",
+        status: "in-progress",
+        image: "/images/projects/personal-website.png",
+        github: "https://github.com/JosephDriedger/Personal-Website",
+        demo: null,
+        website: "https://joeydriedger.ca",
+        technologies: ["Node.js", "Express.js", "EJS", "HTML5", "CSS", "JavaScript", "MySQL"]
     },
     {
         id: 2,
-        title: "Hallownest Project",
-        description: "A gameplay-focused prototype inspired by dark fantasy exploration.",
-        category: "Game",
+        slug: "flank-capture-the-flag",
+        title: "Flank: Capture the Flag",
+        shortDescription: "Desktop multiplayer Unity 2D strategy game adapted from a tabletop design.",
+        description: "A desktop multiplayer strategy game adapted from a tabletop design created in the Fall 2025 Game Design class. Players compete in a turn-based capture-the-flag format, managing units and tactics on a grid-based battlefield. Built in Unity with C# gameplay logic and custom UI designed for strategic play.",
+        category: "Personal",
         type: "game",
-        image: "",
-        github: "",
-        demo: "",
-        technologies: ["Unity", "C#", "Blender"]
+        role: "Developer",
+        status: "completed",
+        image: "/images/projects/flank.png",
+        github: "https://github.com/JosephDriedger/flank-game",
+        demo: null,
+        website: null,
+        technologies: ["Unity", "C#", "Visual Studio"]
     },
     {
         id: 3,
-        title: "Portfolio Website",
-        description: "A personal website built with Express, EJS, JavaScript, CSS, and MySQL.",
-        category: "App",
-        type: "app",
-        image: "",
-        github: "",
-        demo: "",
-        technologies: ["Node.js", "Express", "EJS", "JavaScript", "CSS", "MySQL"]
-    },
-    {
-        id: 4,
-        title: "Tenant Bureau Platform",
-        description: "A subscription-based platform for tenant and landlord services.",
-        category: "App",
-        type: "app",
-        image: "",
-        github: "",
-        demo: "",
-        technologies: ["Node.js", "Express", "EJS", "JavaScript", "CSS", "MySQL"]
+        slug: "echoes-of-the-forgotten-keep",
+        title: "Echoes of the Forgotten Keep",
+        shortDescription: "3D dungeon-adventure game built on a custom C++ game engine.",
+        description: "A 3D dungeon-adventure game built on a fully custom C++ game engine. Players explore a dungeon environment rendered with OpenGL, navigating hazards and interacting with the world through systems built from scratch. The engine features an entity-component system (ECS), scene graph, collision detection, and physics, with 3D assets loaded via Assimp.",
+        category: "Academic",
+        type: "game",
+        role: "Engine Architecture Engineer",
+        status: "completed",
+        image: "/images/projects/echoes.png",
+        github: "https://github.com/JosephDriedger/echoes-of-the-forgotten-keep",
+        demo: "https://github.com/JosephDriedger/echoes-of-the-forgotten-keep/releases/tag/v1.0.0",
+        website: null,
+        technologies: ["C++", "OpenGL", "GLFW", "GLM", "Assimp", "CMake"]
     }
 ];
 
@@ -153,6 +157,26 @@ exports.findById = async (id) =>
         WHERE P.ID = ?
         `,
         [id]
+    );
+
+    return normalizeProject(rows[0] || null);
+};
+
+exports.findBySlug = async (slug) =>
+{
+    if (useMockData)
+    {
+        return normalizeProject(
+            mockProjects.find((project) => project.slug === slug) || null
+        );
+    }
+
+    const [rows] = await db.query(
+        `
+        ${projectSelect}
+        WHERE P.SLUG = ?
+        `,
+        [slug]
     );
 
     return normalizeProject(rows[0] || null);

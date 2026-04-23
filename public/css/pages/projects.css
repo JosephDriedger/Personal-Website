@@ -22,6 +22,13 @@
     max-width: 720px;
 }
 
+.project-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.25rem;
+}
+
 @media (max-width: 900px) {
     .project-hero {
         grid-template-columns: 1fr;

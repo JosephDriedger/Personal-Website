@@ -41,7 +41,7 @@ exports.getApps = async (req, res, next) => {
 
 exports.getProjectDetail = async (req, res, next) => {
   try {
-    const project = await projectService.getProjectById(req.params.id);
+    const project = await projectService.getProjectBySlug(req.params.slug);
 
     if (!project) {
       return res.status(404).render("pages/404", {

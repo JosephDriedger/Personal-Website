@@ -14,3 +14,8 @@ exports.getProjectById = async (id) =>
 {
     return await projectModel.findById(id);
 };
+
+exports.getProjectBySlug = async (slug) =>
+{
+    return await projectModel.findBySlug(slug);
+};
