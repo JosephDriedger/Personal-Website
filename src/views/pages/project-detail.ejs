@@ -24,25 +24,27 @@
                 <% if (project.role) { %>
                     <p><strong>Role:</strong> <%= project.role %></p>
                 <% } %>
-            </div>
 
-            <div class="project-links">
-                <% if (project.github) { %>
-                    <a href="<%= project.github %>" target="_blank" rel="noreferrer" class="btn btn-secondary">
-                        GitHub Repository
-                    </a>
-                <% } %>
+                <% if (project.github || project.demo || project.website) { %>
+                    <div class="project-links">
+                        <% if (project.github) { %>
+                            <a href="<%= project.github %>" target="_blank" rel="noreferrer" class="btn btn-secondary">
+                                GitHub Repository
+                            </a>
+                        <% } %>
 
-                <% if (project.demo) { %>
-                    <a href="<%= project.demo %>" target="_blank" rel="noreferrer" class="btn btn-primary">
-                        View Release
-                    </a>
-                <% } %>
+                        <% if (project.demo) { %>
+                            <a href="<%= project.demo %>" target="_blank" rel="noreferrer" class="btn btn-primary">
+                                View Release
+                            </a>
+                        <% } %>
 
-                <% if (project.website) { %>
-                    <a href="<%= project.website %>" target="_blank" rel="noreferrer" class="btn btn-primary">
-                        Visit Website
-                    </a>
+                        <% if (project.website) { %>
+                            <a href="<%= project.website %>" target="_blank" rel="noreferrer" class="btn btn-primary">
+                                Visit Website
+                            </a>
+                        <% } %>
+                    </div>
                 <% } %>
             </div>
         </section>
