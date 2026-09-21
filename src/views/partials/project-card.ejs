@@ -32,10 +32,6 @@
     <a href="/projects/<%= project.slug %>" class="project-card-link">
         <% if (project.thumbnail) { %>
             <img src="<%= project.thumbnail %>" alt="<%= project.title %>" class="project-thumbnail" width="800" height="450" loading="lazy" decoding="async">
-        <% } else { %>
-            <div class="project-thumbnail project-thumbnail-placeholder">
-                <span><%= project.title %></span>
-            </div>
         <% } %>
 
         <div class="project-card-content">
