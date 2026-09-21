@@ -17,6 +17,9 @@ View Engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+// Appended to CSS/JS URLs so browsers fetch fresh files after every deploy/restart.
+app.locals.assetVersion = Date.now().toString(36);
+
 /*
 Middleware
 */
