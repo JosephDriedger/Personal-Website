@@ -251,6 +251,25 @@ VALUES (
         '/images/projects/webmainland/01-overview-thumb.webp',
         FALSE,
         11
+    ),
+    (
+        'Lockin'' Ringers Website',
+        'lockin-ringers-website',
+        'Website for a Canadian barbershop quartet built with Node.js, Express, and EJS.',
+        'The official website for Lockin'' Ringers, a young Canadian barbershop quartet. Built on a Node.js and Express backend with EJS layouts and partials, it introduces the quartet and its members, explains the barbershop style, and lets visitors request bookings for events. The vintage design is drawn from the quartet''s boater-hat logo, with animated barber-pole stripes, period signage typography, and a responsive layout.',
+        'personal',
+        'website',
+        'Developer',
+        'in-progress',
+        '2025-02-22',
+        NULL,
+        'https://github.com/JosephDriedger/Lockin-Ringers',
+        NULL,
+        NULL,
+        '/images/projects/lockin-ringers/01-home.webp',
+        '/images/projects/lockin-ringers/01-home-thumb.webp',
+        FALSE,
+        12
     );
 
 INSERT INTO PROJECT_TECH (PROJECT_ID, TECH_NAME, DISPLAY_ORDER)
@@ -323,7 +342,14 @@ VALUES
     -- 12: Webmainland Media Project
     (12, 'Next.js', 1),
     (12, 'Python', 2),
-    (12, 'MySQL', 3);
+    (12, 'MySQL', 3),
+    -- 13: Lockin' Ringers Website
+    (13, 'Node.js', 1),
+    (13, 'Express.js', 2),
+    (13, 'EJS', 3),
+    (13, 'HTML5', 4),
+    (13, 'CSS', 5),
+    (13, 'JavaScript', 6);
 
 INSERT INTO PROJECT_MEDIA (
         PROJECT_ID,
@@ -383,4 +409,9 @@ VALUES
     (11, 'image', 'Typical transportation emissions in BC communities', '/images/projects/ecocities/04-transportation.webp', '/images/projects/ecocities/04-transportation-thumb.webp', 4),
     (11, 'image', 'About the data and project attributions', '/images/projects/ecocities/05-about.webp', '/images/projects/ecocities/05-about-thumb.webp', 5),
     (12, 'image', 'Property listings, tenant matches and match history', '/images/projects/webmainland/01-overview.webp', '/images/projects/webmainland/01-overview-thumb.webp', 1),
-    (12, 'image', 'Searching tenants for a listing and recording match feedback', '/images/projects/webmainland/02-search.webp', '/images/projects/webmainland/02-search-thumb.webp', 2);
+    (12, 'image', 'Searching tenants for a listing and recording match feedback', '/images/projects/webmainland/02-search.webp', '/images/projects/webmainland/02-search-thumb.webp', 2),
+    (13, 'image', 'Home page hero framed by animated barber poles', '/images/projects/lockin-ringers/01-home.webp', '/images/projects/lockin-ringers/01-home-thumb.webp', 1),
+    (13, 'image', 'What is Barbershop? section with the four voice parts', '/images/projects/lockin-ringers/02-what-is-barbershop.webp', '/images/projects/lockin-ringers/02-what-is-barbershop-thumb.webp', 2),
+    (13, 'image', 'About page story and quartet facts', '/images/projects/lockin-ringers/03-our-story.webp', '/images/projects/lockin-ringers/03-our-story-thumb.webp', 3),
+    (13, 'image', 'Event types the quartet performs at', '/images/projects/lockin-ringers/04-perform.webp', '/images/projects/lockin-ringers/04-perform-thumb.webp', 4),
+    (13, 'image', 'Book a Show booking request form', '/images/projects/lockin-ringers/05-book-a-show.webp', '/images/projects/lockin-ringers/05-book-a-show-thumb.webp', 5);

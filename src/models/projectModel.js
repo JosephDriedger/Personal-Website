@@ -174,6 +174,30 @@ const mockProjects = [
             { type: "image", title: "AI agents battling mid-game, with the live move history", url: "/images/projects/abalone/01-ai-battle.webp", thumbnail: "/images/projects/abalone/01-ai-battle-thumb.webp" },
             { type: "image", title: "Game setup: opponent, agent, formation and time limits", url: "/images/projects/abalone/02-game-setup.webp", thumbnail: "/images/projects/abalone/02-game-setup-thumb.webp" }
         ]
+    },
+    {
+        id: 13,
+        slug: "lockin-ringers-website",
+        title: "Lockin' Ringers Website",
+        shortDescription: "Website for a Canadian barbershop quartet built with Node.js, Express, and EJS.",
+        description: "The official website for Lockin' Ringers, a young Canadian barbershop quartet. Built on a Node.js and Express backend with EJS layouts and partials, it introduces the quartet and its members, explains the barbershop style, and lets visitors request bookings for events. The vintage design is drawn from the quartet's boater-hat logo, with animated barber-pole stripes, period signage typography, and a responsive layout.",
+        category: "Personal",
+        type: "website",
+        role: "Developer",
+        status: "in-progress",
+        image: "/images/projects/lockin-ringers/01-home.webp",
+        thumbnail: "/images/projects/lockin-ringers/01-home-thumb.webp",
+        github: "https://github.com/JosephDriedger/Lockin-Ringers",
+        demo: null,
+        website: null,
+        technologies: ["Node.js", "Express.js", "EJS", "HTML5", "CSS", "JavaScript"],
+        media: [
+            { type: "image", title: "Home page hero framed by animated barber poles", url: "/images/projects/lockin-ringers/01-home.webp", thumbnail: "/images/projects/lockin-ringers/01-home-thumb.webp" },
+            { type: "image", title: "What is Barbershop? section with the four voice parts", url: "/images/projects/lockin-ringers/02-what-is-barbershop.webp", thumbnail: "/images/projects/lockin-ringers/02-what-is-barbershop-thumb.webp" },
+            { type: "image", title: "About page story and quartet facts", url: "/images/projects/lockin-ringers/03-our-story.webp", thumbnail: "/images/projects/lockin-ringers/03-our-story-thumb.webp" },
+            { type: "image", title: "Event types the quartet performs at", url: "/images/projects/lockin-ringers/04-perform.webp", thumbnail: "/images/projects/lockin-ringers/04-perform-thumb.webp" },
+            { type: "image", title: "Book a Show booking request form", url: "/images/projects/lockin-ringers/05-book-a-show.webp", thumbnail: "/images/projects/lockin-ringers/05-book-a-show-thumb.webp" }
+        ]
     }
 ];
 
