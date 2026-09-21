@@ -72,14 +72,17 @@ const mockProjects = [
         type: "game",
         role: "Engine Architecture Engineer",
         status: "completed",
-        image: "/images/projects/echoes/01-title.webp",
-        thumbnail: "/images/projects/echoes/01-title-thumb.webp",
+        image: "/images/projects/echoes/01-dungeon.webp",
+        thumbnail: "/images/projects/echoes/01-dungeon-thumb.webp",
         github: "https://github.com/JosephDriedger/echoes-of-the-forgotten-keep",
         demo: "https://github.com/JosephDriedger/echoes-of-the-forgotten-keep/releases/tag/v1.0.0",
         website: null,
         technologies: ["C++", "OpenGL", "GLFW", "GLM", "Assimp", "CMake"],
         media: [
-            { type: "image", title: "Title screen", url: "/images/projects/echoes/01-title.webp", thumbnail: "/images/projects/echoes/01-title-thumb.webp" }
+            { type: "image", title: "Exploring the dungeon as skeleton enemies close in", url: "/images/projects/echoes/01-dungeon.webp", thumbnail: "/images/projects/echoes/01-dungeon-thumb.webp" },
+            { type: "image", title: "Combat with the health HUD", url: "/images/projects/echoes/02-combat.webp", thumbnail: "/images/projects/echoes/02-combat-thumb.webp" },
+            { type: "image", title: "Engine debug view showing collision volumes", url: "/images/projects/echoes/03-collision-debug.webp", thumbnail: "/images/projects/echoes/03-collision-debug-thumb.webp" },
+            { type: "image", title: "Title screen", url: "/images/projects/echoes/04-title.webp", thumbnail: "/images/projects/echoes/04-title-thumb.webp" }
         ]
     },
     {
