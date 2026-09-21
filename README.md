@@ -2,6 +2,22 @@
 
 A personal portfolio website built with Node.js and Express, featuring projects, videos, and a contact form.
 
+Live site: [joeydriedger.ca](https://joeydriedger.ca/)
+
+## Screenshots
+
+![Home page](docs/screenshots/home.png)
+
+| Projects | Music Videos |
+|----------|--------------|
+| ![Projects page](docs/screenshots/projects.png) | ![Music videos page](docs/screenshots/music-videos.png) |
+
+| About | Contact |
+|-------|---------|
+| ![About page](docs/screenshots/about.png) | ![Contact page](docs/screenshots/contact.png) |
+
+<img src="docs/screenshots/mobile.png" alt="Home page on mobile" width="300">
+
 ## Tech Stack
 
 - **Runtime:** Node.js

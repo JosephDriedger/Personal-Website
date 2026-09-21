@@ -13,6 +13,7 @@
 
 .project-image {
     width: 100%;
+    height: auto;
     border-radius: var(--radius-lg);
     border: 1px solid var(--border);
     box-shadow: var(--shadow);
@@ -27,6 +28,116 @@
     gap: 0.75rem;
     flex-wrap: wrap;
     margin-top: 1rem;
+}
+
+.project-gallery {
+    margin-bottom: 2rem;
+}
+
+.project-gallery h2 {
+    margin-bottom: 1rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.gallery-item {
+    margin: 0;
+}
+
+.gallery-link {
+    display: block;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+}
+
+.gallery-link img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform 0.25s ease;
+}
+
+.gallery-link:hover img,
+.gallery-link:focus-visible img {
+    transform: scale(1.04);
+}
+
+.gallery-item figcaption {
+    margin-top: 0.5rem;
+    color: var(--text-soft);
+    font-size: 0.9rem;
+}
+
+.gallery-lightbox {
+    width: min(1200px, 94vw);
+    max-width: none;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--bg-elevated);
+    color: inherit;
+    overflow: visible;
+}
+
+.gallery-lightbox::backdrop {
+    background: rgba(5, 8, 18, 0.85);
+}
+
+.gallery-lightbox figure {
+    margin: 0;
+}
+
+.gallery-lightbox img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.gallery-lightbox figcaption {
+    padding: 0.85rem 1.25rem;
+    color: var(--text-soft);
+}
+
+.gallery-close,
+.gallery-nav {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: rgba(11, 16, 32, 0.8);
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.gallery-close {
+    top: 0.75rem;
+    right: 0.75rem;
+}
+
+.gallery-nav {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.gallery-prev {
+    left: 0.75rem;
+}
+
+.gallery-next {
+    right: 0.75rem;
 }
 
 @media (max-width: 900px) {

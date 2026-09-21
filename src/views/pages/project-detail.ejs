@@ -13,9 +13,36 @@
             </div>
 
             <% if (project.image) { %>
-                <img src="/images/projects/<%= project.image %>" alt="<%= project.title %>" class="project-image">
+                <img src="<%= project.image %>" alt="<%= project.title %>" class="project-image" width="1600" height="900" fetchpriority="high">
             <% } %>
         </section>
+
+        <% if (project.media && project.media.length > 1) { %>
+            <section class="project-gallery reveal-on-scroll" aria-label="Screenshots">
+                <h2>Screenshots</h2>
+
+                <div class="gallery-grid">
+                    <% project.media.forEach((item) => { %>
+                        <figure class="gallery-item">
+                            <a href="<%= item.url %>" class="gallery-link" data-gallery-caption="<%= item.title %>">
+                                <img src="<%= item.thumbnail %>" alt="<%= item.title %>" width="800" height="450" loading="lazy" decoding="async">
+                            </a>
+                            <figcaption><%= item.title %></figcaption>
+                        </figure>
+                    <% }) %>
+                </div>
+            </section>
+
+            <dialog class="gallery-lightbox" aria-label="Screenshot viewer">
+                <button type="button" class="gallery-close" aria-label="Close">&times;</button>
+                <button type="button" class="gallery-nav gallery-prev" aria-label="Previous screenshot">&#8249;</button>
+                <figure>
+                    <img src="" alt="">
+                    <figcaption></figcaption>
+                </figure>
+                <button type="button" class="gallery-nav gallery-next" aria-label="Next screenshot">&#8250;</button>
+            </dialog>
+        <% } %>
 
         <section class="project-info reveal-on-scroll">
             <div class="project-meta detail-card">
@@ -54,5 +81,6 @@
 
     <script src="/js/main.js"></script>
     <script src="/js/nav.js"></script>
+    <script src="/js/project-gallery.js"></script>
 </body>
 </html>

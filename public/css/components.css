@@ -98,7 +98,9 @@
 }
 
 .project-thumbnail {
+    display: block;
     width: 100%;
+    height: auto;
     aspect-ratio: 16 / 9;
     object-fit: cover;
     background: #11182f;
