@@ -9,7 +9,9 @@
             <div>
                 <span class="eyebrow">Project Details</span>
                 <h1><%= project.title %></h1>
-                <p class="project-summary"><%= project.description %></p>
+                <% String(project.description || '').split(/\n\s*\n/).filter(Boolean).forEach((paragraph) => { %>
+                    <p class="project-summary"><%= paragraph.trim() %></p>
+                <% }) %>
             </div>
 
             <% if (project.image) { %>
