@@ -28,7 +28,9 @@ VALUES (
         'Joseph Driedger Personal Website',
         'joseph-driedger-personal-website',
         'Personal portfolio website built with Node.js, Express, EJS, and MySQL.',
-        'A personal portfolio website for showcasing projects, technical skills, and professional experience. Built with a Node.js and Express backend, EJS templating, and a MySQL database. Features a responsive design with project filtering by category and technology, a contact form with reCAPTCHA protection, and dynamic project detail pages.',
+        'The portfolio site you are on now: a home for my projects, skills, and music videos. Visitors can search projects, filter them by category and technology, open a detail page with a screenshot gallery, watch music videos, and send a message through the contact form.
+
+Built with a Node.js and Express backend, EJS templates, and a MySQL database, with a responsive front end in HTML, CSS, and JavaScript. The contact form is protected by reCAPTCHA and sends email through Resend. It runs on an AWS Lightsail server behind nginx and pm2, and GitHub Actions deploys it automatically whenever changes are pushed to main.',
         'personal',
         'website',
         'Developer',
@@ -47,7 +49,9 @@ VALUES (
         'Flank: Capture the Flag',
         'flank-capture-the-flag',
         'Desktop multiplayer Unity 2D strategy game adapted from a tabletop design.',
-        'A desktop multiplayer strategy game adapted from a tabletop design created in the Fall 2025 Game Design class. Players compete in a turn-based capture-the-flag format, managing units and tactics on a grid-based battlefield. Built in Unity with C# gameplay logic and custom UI designed for strategic play.',
+        'A turn-based tactical strategy game for two players, adapted from a tabletop design created in the Fall 2025 Game Design class. An Attacker tries to return flags to base while a Defender tries to eliminate every attacking piece. Each side moves differently, and captures are made by flanking an enemy piece from opposite sides on a hexagonal board. It supports single player against an AI, pass-and-play, LAN, and online multiplayer, and includes an interactive tutorial.
+
+Built in Unity with C# gameplay logic and custom UI designed for strategic play. LAN games find each other through UDP broadcast discovery, and online games connect through a small Node.js matchmaking server. Installer scripts package the game for desktop, using Inno Setup on Windows and a disk image on macOS.',
         'personal',
         'game',
         'Developer',
@@ -55,7 +59,7 @@ VALUES (
         '2025-12-01',
         '2026-01-31',
         'https://github.com/JosephDriedger/flank-game',
-        NULL,
+        'https://josephdriedger.itch.io/flank',
         NULL,
         '/images/projects/flank/01-gameplay-board.webp',
         '/images/projects/flank/01-gameplay-board-thumb.webp',
@@ -66,7 +70,9 @@ VALUES (
         'Echoes of the Forgotten Keep',
         'echoes-of-the-forgotten-keep',
         '3D dungeon-adventure game built on a custom C++ game engine.',
-        'A 3D dungeon-adventure game built on a fully custom C++ game engine. Players explore a dungeon environment rendered with OpenGL, navigating hazards and interacting with the world through systems built from scratch. The engine features an entity-component system (ECS), scene graph, collision detection, and physics, with 3D assets loaded via Assimp.',
+        'A 3D dungeon-crawler action game. Players fight through procedurally generated dungeon rooms with combo attacks and a dash, facing enemies that patrol, chase, and attack, while doors swing open on approach and floor switches drive puzzles. A health bar tracks damage, and knockback and brief invincibility after each hit keep combat readable.
+
+Built on a custom C++20 game engine written from scratch rather than an off-the-shelf one. The engine has a data-oriented entity-component-system (ECS) core, an OpenGL 4.6 renderer with GLSL shaders, skeletal animation with GPU skinning, AABB collision, a scene stack for menus, and an SDL3 platform layer. 3D models and animations are loaded from GLB files with Assimp, math uses GLM, and the project builds with CMake.',
         'academic',
         'game',
         'Engine Architecture Engineer',
@@ -106,7 +112,9 @@ Built in Unity 6 with the Universal Render Pipeline and C#, using Game Creator f
         'Inertia Pause',
         'inertia-pause',
         '3D Unity game built with a team, focused on assets and production polish.',
-        'A 3D Unity game built as a team project featuring a time-manipulation mechanic that lets the player pause and rewind inertia-driven objects to solve physics puzzles. Custom 3D models, textures, and audio were sourced and integrated to bring a cohesive aesthetic and polished feel to the final release.',
+        'A 3D puzzle-action game built around a time-manipulation mechanic that lets the player pause and rewind inertia-driven objects, such as bullets frozen in flight, to solve physics puzzles. Scenarios play out in a bridge, a city center, a restaurant, and an office, with difficulty settings, a planning HUD, and a tutorial that explains the time-freeze mechanic.
+
+Built by a team in Unity with C#. My role was sourcing and designing the assets: 3D models were created and edited in Blender, textures and UI art in Photoshop, and audio in Audacity, then integrated into the game to give the final release a cohesive aesthetic and a polished feel.',
         'academic',
         'game',
         'Asset Sourcer & Designer',
@@ -114,7 +122,7 @@ Built in Unity 6 with the Universal Render Pipeline and C#, using Game Creator f
         '2025-09-01',
         '2025-12-31',
         'https://github.com/JosephDriedger/Inertia-Pause',
-        'https://github.com/PatrickNg995/Inertia-Pause/releases/tag/v1.0.0',
+        'https://patrickng.itch.io/inertia-pause',
         NULL,
         '/images/projects/inertia-pause/01-bridge.webp',
         '/images/projects/inertia-pause/01-bridge-thumb.webp',
@@ -125,7 +133,9 @@ Built in Unity 6 with the Universal Render Pipeline and C#, using Game Creator f
         'Wayfindr Campus Navigation App',
         'wayfindr-campus-navigation-app',
         'Campus navigation web app with Mapbox GL and automated testing.',
-        'A web-based campus navigation app that lets BCIT students find and navigate between buildings and classrooms. Powered by Mapbox GL for interactive in-browser maps, with a Node.js and Express backend, EJS-rendered UI, and an automated testing suite to catch regressions early.',
+        'A campus navigation web app that lets BCIT students find and navigate between buildings and classrooms. Users search for a room, see walking directions on an interactive map, browse a building''s floor plan and room list, sign in, and save favourite locations for quick access. Administrators can edit the map itself from a dedicated admin area.
+
+Built on a Node.js and Express backend with EJS-rendered pages and Mapbox GL JS for the interactive maps. Firebase Authentication handles secure login and Firestore stores each user''s favourites, with the server using the Firebase Admin SDK and a node graph of the campus. An automated Jest test suite runs in a GitHub Actions CI pipeline to catch regressions early.',
         'academic',
         'app',
         'UI Developer',
@@ -144,7 +154,9 @@ Built in Unity 6 with the Universal Render Pipeline and C#, using Game Creator f
         'MelodiProof AI',
         'melodiproof-ai',
         'CNN model for detecting AI-generated music built with Python and TensorFlow.',
-        'A machine learning classifier that detects AI-generated music in audio files. A convolutional neural network (CNN) is trained on audio datasets using Python and TensorFlow, producing a binary classification result with strong accuracy. Includes full training and evaluation pipelines for iterating on model performance.',
+        'A desktop app that detects whether a music track is AI-generated. Load an audio file and it reports whether the track looks AI-generated or human-made, and shows the mel spectrogram it analysed.
+
+A convolutional neural network (CNN) classifies mel spectrograms of the audio, producing a binary result with strong accuracy. It was trained on audio datasets with Python and TensorFlow and exported to ONNX for fast inference inside the app, with full training and evaluation pipelines for iterating on model performance. The interface is a Python Tkinter GUI, packaged as a Windows executable with PyInstaller and an Inno Setup installer.',
         'academic',
         'ai',
         'AI & ML Engineer',
@@ -163,7 +175,9 @@ Built in Unity 6 with the Universal Render Pipeline and C#, using Game Creator f
         'UCM BCIT Website',
         'ucm-bcit-website',
         'Custom Node.js and Express.js website for a BCIT student club.',
-        'The official website for University Christian Ministries at BCIT, replacing a limited generic website-builder with a fully custom implementation. Features club news, event information, and a contact page, built on a Node.js and Express backend with HTML, CSS, JavaScript, and a SQL database.',
+        'The official website for University Christian Ministries at BCIT, replacing a limited generic website builder with a fully custom site. It shares club news, the mission statement, and weekly meeting details, lists affiliated organizations and core-group sign-ups, and has a contact page.
+
+Built on a Node.js and Express backend with HTML, CSS, and JavaScript on the front end and a SQL database. Sessions are handled with express-session, and contact messages are emailed with Nodemailer.',
         'personal',
         'website',
         'Developer',
@@ -182,7 +196,9 @@ Built in Unity 6 with the Universal Render Pipeline and C#, using Game Creator f
         'Abalone Game',
         'abalone-game',
         'Digital Abalone board game adaptation with AI decision-making, built in Python.',
-        'A digital adaptation of the Abalone marble-pushing strategy board game, built for a class tournament. Features a fully playable implementation with an AI opponent driven by decision-making algorithms, faithful to the original rules. Built in Python with Pygame for rendering and Photoshop for custom UI assets.',
+        'A digital version of the Abalone marble-pushing strategy board game, built for a class tournament. It is fully playable and faithful to the original rules. Players choose their opponent, AI agent, starting formation, and time limits, and can watch AI agents battle each other with a live move history.
+
+Built by a team of four in Python 3.11, with Pygame for rendering and Photoshop for custom UI assets. The AI opponents are driven by decision-making algorithms, and the game is packaged as a standalone Windows build with PyInstaller and an Inno Setup installer.',
         'academic',
         'game',
         'Gameplay Programmer',
@@ -222,7 +238,9 @@ Built with a team of three students. The front end is plain HTML, CSS, and JavaS
         'Ecocities Industry Project',
         'ecocities-industry-project',
         'Industry-sponsored full-stack project using Next.js, Python, and MongoDB.',
-        'An industry-sponsored web platform built for the BCIT Centre for Ecocities, enabling stakeholders to explore and interact with processed environmental footprint data. Features a Next.js frontend backed by a MongoDB database populated through a Python CSV data pipeline, with automated tests validating application reliability.',
+        'An industry-sponsored web platform built for the BCIT Centre for Ecocities that lets stakeholders explore processed environmental footprint data. Visitors can view consumption-based emissions inventories and ecological footprint breakdowns, including how many Earths are required, for BC communities such as Metro Vancouver and Victoria, and switch between communities to compare them.
+
+Built as a Next.js frontend backed by a MongoDB database that is populated through a Python CSV data pipeline. Automated tests validate application reliability.',
         'industry',
         'app',
         'Full-Stack Developer',
@@ -241,7 +259,9 @@ Built with a team of three students. The front end is plain HTML, CSS, and JavaS
         'Webmainland Media Project',
         'webmainland-media-project',
         'Industry-sponsored tenant-matching platform built with Python and Next.js.',
-        'An industry-sponsored tenant-matching platform that connects landlords with prospective tenants based on configurable rental criteria. A Python API handles the matching logic while a Next.js frontend presents property listings and dynamic search results to users.',
+        'An industry-sponsored tenant-matching platform that connects landlords with prospective tenants based on configurable rental criteria. It shows property listings alongside their tenant matches and match history, and lets users search tenants for a listing and record feedback on each match.
+
+A Python API handles the matching logic, while a Next.js frontend presents the property listings and dynamic search results. Listing and tenant data is stored in MySQL.',
         'industry',
         'app',
         'Full-Stack Developer',
@@ -260,7 +280,9 @@ Built with a team of three students. The front end is plain HTML, CSS, and JavaS
         'Lock-in'' Ringers Website',
         'lockin-ringers-website',
         'Website for a Canadian barbershop quartet built with Node.js, Express, and EJS.',
-        'The official website for Lock-in'' Ringers, a young Canadian barbershop quartet. Built on a Node.js and Express backend with EJS layouts and partials, it introduces the quartet and its members, explains the barbershop style, and lets visitors request bookings for events. The vintage design is drawn from the quartet''s boater-hat logo, with animated barber-pole stripes, period signage typography, and a responsive layout.',
+        'The official website for Lock-in'' Ringers, a young Canadian barbershop quartet based in British Columbia. It introduces the quartet and its members, explains the barbershop style and its four voice parts, lists the kinds of events they perform at, and lets visitors send a booking request. The vintage design is drawn from the quartet''s boater-hat logo, with animated barber-pole stripes and period signage typography, and it works on any screen size.
+
+Built on a Node.js and Express backend with EJS layouts and partials, and hand-written CSS using custom properties, Grid, and Flexbox, with Google Fonts for the period typography. Requests are rate-limited with express-rate-limit. It runs on an AWS Lightsail server behind nginx with HTTPS from Let''s Encrypt, and GitHub Actions deploys it automatically on every push to main.',
         'personal',
         'website',
         'Developer',
@@ -293,7 +315,7 @@ VALUES
     -- 3: Echoes of the Forgotten Keep
     (3, 'C++', 1),
     (3, 'OpenGL', 2),
-    (3, 'GLFW', 3),
+    (3, 'SDL3', 3),
     (3, 'GLM', 4),
     (3, 'Assimp', 5),
     (3, 'CMake', 6),
