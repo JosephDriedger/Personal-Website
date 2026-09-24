@@ -101,7 +101,7 @@ Built in Unity 6 with the Universal Render Pipeline and C#, using Game Creator f
         '2026-01-01',
         '2026-04-30',
         'https://github.com/JosephDriedger/Call-Of-Cthulhu',
-        NULL,
+        'https://github.com/JosephDriedger/Call-Of-Cthulhu/releases/tag/v0.1.0',
         NULL,
         '/images/projects/call-of-cthulhu/01-statue-puzzle.webp',
         '/images/projects/call-of-cthulhu/01-statue-puzzle-thumb.webp',
