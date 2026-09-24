@@ -1,15 +1,3 @@
-const nodemailer = require("nodemailer");
-
-const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
-    secure: process.env.SMTP_SECURE === "true",
-    auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-    }
-});
-
 function escapeHtml(value)
 {
     return String(value)
@@ -26,12 +14,18 @@ exports.sendContactEmail = async (name, email, message) =>
     const safeEmail = escapeHtml(email);
     const safeMessage = escapeHtml(message).replace(/\n/g, "<br>");
 
-    await transporter.sendMail({
-        from: process.env.SMTP_FROM,
-        to: process.env.CONTACT_TO_EMAIL,
-        replyTo: email,
-        subject: `Website Contact Form - ${name}`,
-        text:
+    const response = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            from: process.env.SMTP_FROM,
+            to: process.env.CONTACT_TO_EMAIL,
+            reply_to: email,
+            subject: `Website Contact Form - ${name}`,
+            text:
 `New contact form submission
 
 Name: ${name}
@@ -67,5 +61,12 @@ ${message}`,
     </div>
 </body>
 </html>`
+        })
     });
+
+    if (!response.ok)
+    {
+        const errorBody = await response.text();
+        throw new Error(`Resend API error (${response.status}): ${errorBody}`);
+    }
 };

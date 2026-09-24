@@ -24,7 +24,7 @@ Live site: [joeydriedger.ca](https://joeydriedger.ca/)
 - **Framework:** Express
 - **View Engine:** EJS
 - **Database:** MySQL (via `mysql2`)
-- **Email:** Nodemailer
+- **Email:** Resend
 - **Rate Limiting:** express-rate-limit
 
 ## Project Structure
@@ -71,6 +71,10 @@ DB_USER=root
 DB_PASSWORD=yourpassword
 DB_NAME=PERSONAL_WEBSITE
 ALLOW_DEV_DB=false
+
+RESEND_API_KEY=your-resend-api-key
+SMTP_FROM=contact@joeydriedger.ca
+CONTACT_TO_EMAIL=you@example.com
 ```
 
 ### Running
