@@ -18,7 +18,7 @@ const mockProjects = [
         category: "Personal",
         type: "website",
         role: "Developer",
-        status: "in-progress",
+        status: "completed",
         image: "/images/projects/personal-website/01-home.webp",
         thumbnail: "/images/projects/personal-website/01-home-thumb.webp",
         github: "https://github.com/JosephDriedger/Personal-Website",

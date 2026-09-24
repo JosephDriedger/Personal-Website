@@ -34,7 +34,7 @@ Built with a Node.js and Express backend, EJS templates, and a MySQL database, w
         'personal',
         'website',
         'Developer',
-        'in-progress',
+        'completed',
         '2026-03-01',
         NULL,
         'https://github.com/JosephDriedger/Personal-Website',
