@@ -37,6 +37,7 @@
         <div class="project-card-content">
             <div class="project-card-topline">
                 <span class="project-category"><%= project.category || project.type || 'Project' %></span>
+                <%- include('project-status', { project }) %>
             </div>
 
             <h3 class="project-title"><%= project.title %></h3>

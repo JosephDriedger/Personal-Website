@@ -7,7 +7,10 @@
     <main class="container page page-project-detail">
         <section class="project-hero reveal-on-scroll">
             <div>
-                <span class="eyebrow">Project Details</span>
+                <div class="project-hero-topline">
+                    <span class="eyebrow">Project Details</span>
+                    <%- include('../partials/project-status', { project }) %>
+                </div>
                 <h1><%= project.title %></h1>
                 <% String(project.description || '').split(/\n\s*\n/).filter(Boolean).forEach((paragraph) => { %>
                     <p class="project-summary"><%= paragraph.trim() %></p>

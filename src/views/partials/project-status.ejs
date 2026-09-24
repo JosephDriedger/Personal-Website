@@ -1,0 +1,10 @@
+<%
+    const statusKey = String(project.status || "").trim().toLowerCase();
+    const statusLabels = {
+        "completed": "Completed",
+        "in-progress": "In Progress"
+    };
+%>
+<% if (statusLabels[statusKey]) { %>
+    <span class="project-status project-status-<%= statusKey %>"><%= statusLabels[statusKey] %></span>
+<% } %>
