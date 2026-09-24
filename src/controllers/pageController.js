@@ -4,10 +4,17 @@ const videoService = require("../services/videoService");
 exports.home = async (req, res, next) => {
   try {
     const projects = await projectService.getAllProjects();
+    const highlighted = projects.slice(0, 3);
+    const inProgress = projects.filter(
+      (project) =>
+        String(project.status || "").trim().toLowerCase() === "in-progress" &&
+        !highlighted.includes(project)
+    );
 
     res.render("pages/home", {
       title: "Home",
-      projects: projects.slice(0, 3),
+      projects: highlighted,
+      inProgress,
     });
   } catch (error) {
     next(error);

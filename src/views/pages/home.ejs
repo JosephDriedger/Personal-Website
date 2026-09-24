@@ -51,6 +51,23 @@
                 <% } %>
             </div>
         </section>
+
+        <% if (typeof inProgress !== 'undefined' && inProgress.length) { %>
+            <section class="featured-projects reveal-on-scroll">
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">Currently Building</span>
+                        <h2>In-Progress Projects</h2>
+                    </div>
+                </div>
+
+                <div class="project-grid">
+                    <% inProgress.forEach(project => { %>
+                        <%- include('../partials/project-card', { project: project }) %>
+                    <% }) %>
+                </div>
+            </section>
+        <% } %>
     </main>
 
     <%- include('../partials/footer') %>
