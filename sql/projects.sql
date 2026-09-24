@@ -253,10 +253,10 @@ VALUES (
         11
     ),
     (
-        'Lockin'' Ringers Website',
+        'Lock-in'' Ringers Website',
         'lockin-ringers-website',
         'Website for a Canadian barbershop quartet built with Node.js, Express, and EJS.',
-        'The official website for Lockin'' Ringers, a young Canadian barbershop quartet. Built on a Node.js and Express backend with EJS layouts and partials, it introduces the quartet and its members, explains the barbershop style, and lets visitors request bookings for events. The vintage design is drawn from the quartet''s boater-hat logo, with animated barber-pole stripes, period signage typography, and a responsive layout.',
+        'The official website for Lock-in'' Ringers, a young Canadian barbershop quartet. Built on a Node.js and Express backend with EJS layouts and partials, it introduces the quartet and its members, explains the barbershop style, and lets visitors request bookings for events. The vintage design is drawn from the quartet''s boater-hat logo, with animated barber-pole stripes, period signage typography, and a responsive layout.',
         'personal',
         'website',
         'Developer',
@@ -265,7 +265,7 @@ VALUES (
         NULL,
         'https://github.com/JosephDriedger/Lockin-Ringers',
         NULL,
-        NULL,
+        'https://lockinringers.ca/',
         '/images/projects/lockin-ringers/01-home.webp',
         '/images/projects/lockin-ringers/01-home-thumb.webp',
         FALSE,
@@ -343,7 +343,7 @@ VALUES
     (12, 'Next.js', 1),
     (12, 'Python', 2),
     (12, 'MySQL', 3),
-    -- 13: Lockin' Ringers Website
+    -- 13: Lock-in' Ringers Website
     (13, 'Node.js', 1),
     (13, 'Express.js', 2),
     (13, 'EJS', 3),

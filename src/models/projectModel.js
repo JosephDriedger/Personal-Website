@@ -178,9 +178,9 @@ const mockProjects = [
     {
         id: 13,
         slug: "lockin-ringers-website",
-        title: "Lockin' Ringers Website",
+        title: "Lock-in' Ringers Website",
         shortDescription: "Website for a Canadian barbershop quartet built with Node.js, Express, and EJS.",
-        description: "The official website for Lockin' Ringers, a young Canadian barbershop quartet. Built on a Node.js and Express backend with EJS layouts and partials, it introduces the quartet and its members, explains the barbershop style, and lets visitors request bookings for events. The vintage design is drawn from the quartet's boater-hat logo, with animated barber-pole stripes, period signage typography, and a responsive layout.",
+        description: "The official website for Lock-in' Ringers, a young Canadian barbershop quartet. Built on a Node.js and Express backend with EJS layouts and partials, it introduces the quartet and its members, explains the barbershop style, and lets visitors request bookings for events. The vintage design is drawn from the quartet's boater-hat logo, with animated barber-pole stripes, period signage typography, and a responsive layout.",
         category: "Personal",
         type: "website",
         role: "Developer",
@@ -189,7 +189,7 @@ const mockProjects = [
         thumbnail: "/images/projects/lockin-ringers/01-home-thumb.webp",
         github: "https://github.com/JosephDriedger/Lockin-Ringers",
         demo: null,
-        website: null,
+        website: "https://lockinringers.ca/",
         technologies: ["Node.js", "Express.js", "EJS", "HTML5", "CSS", "JavaScript"],
         media: [
             { type: "image", title: "Home page hero framed by animated barber poles", url: "/images/projects/lockin-ringers/01-home.webp", thumbnail: "/images/projects/lockin-ringers/01-home-thumb.webp" },
