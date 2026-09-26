@@ -231,6 +231,17 @@ const projectSelect = `
         ON TECH.PROJECT_ID = P.ID
 `;
 
+// Finished projects come first, newest completion date first (a project with no
+// end date falls back to its start date). In-progress projects follow, newest first.
+const projectOrder = `
+    ORDER BY
+        (P.STATUS = 'In-Progress') ASC,
+        COALESCE(P.END_DATE, P.START_DATE) DESC,
+        P.START_DATE DESC,
+        P.DISPLAY_ORDER ASC,
+        P.ID DESC
+`;
+
 const normalizeProject = (project) =>
 {
     if (!project)
@@ -316,7 +327,7 @@ exports.findAll = async () =>
 
     const [rows] = await db.query(`
         ${projectSelect}
-        ORDER BY P.DISPLAY_ORDER ASC, P.START_DATE DESC, P.ID DESC
+        ${projectOrder}
     `);
 
     return normalizeProjects(rows);
@@ -335,7 +346,7 @@ exports.findByType = async (type) =>
         `
         ${projectSelect}
         WHERE LOWER(P.TYPE) = LOWER(?)
-        ORDER BY P.DISPLAY_ORDER ASC, P.START_DATE DESC, P.ID DESC
+        ${projectOrder}
         `,
         [type]
     );
