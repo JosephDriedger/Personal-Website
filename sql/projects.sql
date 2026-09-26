@@ -295,7 +295,7 @@ Built on a Node.js and Express backend with EJS layouts and partials, and hand-w
         '/images/projects/lockin-ringers/01-home.webp',
         '/images/projects/lockin-ringers/01-home-thumb.webp',
         FALSE,
-        14
+        15
     ),
     (
         'Covenant Night',
@@ -338,6 +338,27 @@ Built solo as my BCIT capstone in Unreal Engine 5 and C++, and currently in pre-
         '/images/projects/open-stance/01-competition-arena-thumb.webp',
         FALSE,
         12
+    ),
+    (
+        'Dawn Beyond Death',
+        'dawn-beyond-death',
+        'Third-person narrative action game in Unreal Engine 5 with procedural worlds and a native C++ animation layer.',
+        'Dawn Beyond Death is a third-person narrative action game about Auren, an Angel of Light who wakes up dead and inexplicably alive again, and the former companion who refused to die and took the world into darkness with him. Auren''s light is the core mechanic: it drains over time and near enemies, repels Lurkers while it is strong, and draws them in when it fades, and the world literally darkens with it. Pulse and Beam abilities can destroy a Corrupt or purify it, turning its armour from violet to gold. Every death changes the world and leaves an Echo replaying what Auren did before, and the story is told through sparse subtitled dialogue and the state of the world, with no cutscenes or collectible notes.
+
+Built solo in Unreal Engine 5 with C++ for the systems, characters, worlds, and animation, and Blueprint only where it is the better tool. All four regions are generated at runtime, from a height field to landmarks and encounters, and streamed around the player in 128 m chunks on worker threads. A native animation layer blends locomotion and clips without animation Blueprints, and a Python toolkit poses and bakes the gameplay animations for all four characters. The game is still in development, and the screenshots are concept art rendered in Blender from the game''s own character models.',
+        'personal',
+        'game',
+        'Developer',
+        'in-progress',
+        '2026-04-06',
+        NULL,
+        'https://github.com/JosephDriedger/DawnBeyondDeath',
+        NULL,
+        NULL,
+        '/images/projects/dawn-beyond-death/01-resurrection.webp',
+        '/images/projects/dawn-beyond-death/01-resurrection-thumb.webp',
+        FALSE,
+        14
     );
 
 INSERT INTO PROJECT_TECH (PROJECT_ID, TECH_NAME, DISPLAY_ORDER)
@@ -429,7 +450,12 @@ VALUES
     (15, 'C++', 2),
     (15, 'Blender', 3),
     (15, 'Python', 4),
-    (15, 'Perforce', 5);
+    (15, 'Perforce', 5),
+    -- 16: Dawn Beyond Death
+    (16, 'Unreal Engine', 1),
+    (16, 'C++', 2),
+    (16, 'Blender', 3),
+    (16, 'Python', 4);
 
 INSERT INTO PROJECT_MEDIA (
         PROJECT_ID,
@@ -514,4 +540,11 @@ VALUES
     (15, 'image', 'Concept Art: Competition Arena with the Octagonal Mat and Scoreboards', '/images/projects/open-stance/01-competition-arena.webp', '/images/projects/open-stance/01-competition-arena-thumb.webp', 1),
     (15, 'image', 'Concept Art: Training Dojang with Mats, Mirrors, and Kick Pads', '/images/projects/open-stance/02-training-dojang.webp', '/images/projects/open-stance/02-training-dojang-thumb.webp', 2),
     (15, 'image', 'Concept Art: Fighter in Dobok and Sparring Gear, Front, Side, and Back', '/images/projects/open-stance/03-fighter.webp', '/images/projects/open-stance/03-fighter-thumb.webp', 3),
-    (15, 'image', 'Concept Art: Referee', '/images/projects/open-stance/04-referee.webp', '/images/projects/open-stance/04-referee-thumb.webp', 4);
+    (15, 'image', 'Concept Art: Referee', '/images/projects/open-stance/04-referee.webp', '/images/projects/open-stance/04-referee-thumb.webp', 4),
+    (16, 'image', 'Concept Art: Resurrection, Auren Wakes in the Crater at Ashen Rise', '/images/projects/dawn-beyond-death/01-resurrection.webp', '/images/projects/dawn-beyond-death/01-resurrection-thumb.webp', 1),
+    (16, 'image', 'Concept Art: The Processional Way with Lurkers at the Edge of His Light', '/images/projects/dawn-beyond-death/02-processional-way.webp', '/images/projects/dawn-beyond-death/02-processional-way-thumb.webp', 2),
+    (16, 'image', 'Concept Art: The Four, Auren, Soren, a Corrupt, and a Lurker', '/images/projects/dawn-beyond-death/03-characters.webp', '/images/projects/dawn-beyond-death/03-characters-thumb.webp', 3),
+    (16, 'image', 'Concept Art: Restoration, a Purified Corrupt''s Armour Turns from Violet to Gold', '/images/projects/dawn-beyond-death/04-restoration.webp', '/images/projects/dawn-beyond-death/04-restoration-thumb.webp', 4),
+    (16, 'image', 'Concept Art: The Cathedral of Silence and Its Frozen Angels', '/images/projects/dawn-beyond-death/05-cathedral-of-silence.webp', '/images/projects/dawn-beyond-death/05-cathedral-of-silence-thumb.webp', 5),
+    (16, 'image', 'Concept Art: Veilwood, Mercy in the Bioluminescent Dark', '/images/projects/dawn-beyond-death/06-veilwood.webp', '/images/projects/dawn-beyond-death/06-veilwood-thumb.webp', 6),
+    (16, 'image', 'Concept Art: The Breaking Dawn, the Last Terrace', '/images/projects/dawn-beyond-death/07-breaking-dawn.webp', '/images/projects/dawn-beyond-death/07-breaking-dawn-thumb.webp', 7);
