@@ -311,7 +311,7 @@ Built solo in Unity 6 with the Universal Render Pipeline and C#. Guards run on a
         '2026-05-18',
         '2026-10-01',
         'https://github.com/JosephDriedger/Covenant-Night',
-        'https://github.com/JosephDriedger/Covenant-Night/releases/tag/v1.0.0',
+        'https://josephdriedger.itch.io/covenant-night',
         NULL,
         '/images/projects/covenant-night/01-palace-district.webp',
         '/images/projects/covenant-night/01-palace-district-thumb.webp',
