@@ -295,7 +295,7 @@ Built on a Node.js and Express backend with EJS layouts and partials, and hand-w
         '/images/projects/lockin-ringers/01-home.webp',
         '/images/projects/lockin-ringers/01-home-thumb.webp',
         FALSE,
-        15
+        16
     ),
     (
         'Covenant Night',
@@ -337,7 +337,7 @@ Built solo as my BCIT capstone in Unreal Engine 5 and C++, and currently in pre-
         '/images/projects/open-stance/01-competition-arena.webp',
         '/images/projects/open-stance/01-competition-arena-thumb.webp',
         FALSE,
-        13
+        14
     ),
     (
         'Dawn Beyond Death',
@@ -358,7 +358,28 @@ Built solo in Unreal Engine 5 with C++ for the systems, characters, worlds, and 
         '/images/projects/dawn-beyond-death/01-resurrection.webp',
         '/images/projects/dawn-beyond-death/01-resurrection-thumb.webp',
         FALSE,
-        14
+        15
+    ),
+    (
+        'Animal Farm',
+        'animal-farm',
+        'Gritty farm-life simulator in Unreal Engine 5 about clearing overgrown land, building plots, and raising crops and animals.',
+        'Animal Farm is a gritty farm-life simulator about taking over rundown, overgrown land and turning it into a working, mostly self-running farm. You clear tiles to produce building materials, place variable-size farmland plots and animal pens alongside fixed-size buildings such as warehouses, barns, feed troughs, and sprinklers, then buy seeds and baby animals, water and feed them so they grow, and sell what they become to pay for the next round of land and buildings. There is no combat and no failure state: growth simply pauses until a crop or animal is cared for, and the farm itself tells the story as it changes from overgrown to tidy.
+
+Built by a team of three in Unreal Engine 5, with GitHub for version control and shared project files. I own the items and inventory systems for seeds, animal crates, tools, and building materials, the inventory HUD and warehouse storage, buying and selling, and the shop and build mode UI. I also own the menu system, covering the main menu, new and load game, settings, and pause menu, plus the sound effects. My teammates build the tile system, placement, buildings, day and night cycle, crop and animal growth, saving and loading, and the player controller and NPCs. The game is still in pre-production, and the screenshots are concept art for the clearing, growth, building, and shop loops.',
+        'academic',
+        'game',
+        'Gameplay & UI Developer',
+        'in-progress',
+        '2026-10-14',
+        NULL,
+        'https://github.com/JosephDriedger/Animal-Farm',
+        NULL,
+        NULL,
+        '/images/projects/animal-farm/01-farm-overview.webp',
+        '/images/projects/animal-farm/01-farm-overview-thumb.webp',
+        FALSE,
+        13
     );
 
 INSERT INTO PROJECT_TECH (PROJECT_ID, TECH_NAME, DISPLAY_ORDER)
@@ -455,7 +476,10 @@ VALUES
     (16, 'Unreal Engine', 1),
     (16, 'C++', 2),
     (16, 'Blender', 3),
-    (16, 'Python', 4);
+    (16, 'Python', 4),
+    -- 17: Animal Farm
+    (17, 'Unreal Engine', 1),
+    (17, 'Git', 2);
 
 INSERT INTO PROJECT_MEDIA (
         PROJECT_ID,
@@ -548,4 +572,10 @@ VALUES
     (16, 'image', 'Concept Art: Restoration, a Purified Corrupt''s Armour Turns from Violet to Gold', '/images/projects/dawn-beyond-death/04-restoration.webp', '/images/projects/dawn-beyond-death/04-restoration-thumb.webp', 4),
     (16, 'image', 'Concept Art: The Cathedral of Silence and Its Frozen Angels', '/images/projects/dawn-beyond-death/05-cathedral-of-silence.webp', '/images/projects/dawn-beyond-death/05-cathedral-of-silence-thumb.webp', 5),
     (16, 'image', 'Concept Art: Veilwood, Mercy in the Bioluminescent Dark', '/images/projects/dawn-beyond-death/06-veilwood.webp', '/images/projects/dawn-beyond-death/06-veilwood-thumb.webp', 6),
-    (16, 'image', 'Concept Art: The Breaking Dawn, the Last Terrace', '/images/projects/dawn-beyond-death/07-breaking-dawn.webp', '/images/projects/dawn-beyond-death/07-breaking-dawn-thumb.webp', 7);
+    (16, 'image', 'Concept Art: The Breaking Dawn, the Last Terrace', '/images/projects/dawn-beyond-death/07-breaking-dawn.webp', '/images/projects/dawn-beyond-death/07-breaking-dawn-thumb.webp', 7),
+    (17, 'image', 'Concept Art: The Farm at Midday, Overgrown Land, Plots, a Pen, a Barn, and a Shop Stall', '/images/projects/animal-farm/01-farm-overview.webp', '/images/projects/animal-farm/01-farm-overview-thumb.webp', 1),
+    (17, 'image', 'Concept Art: From Overgrown to Farm, Clear a Tile, Collect Materials, Place a Plot', '/images/projects/animal-farm/02-clearing-land.webp', '/images/projects/animal-farm/02-clearing-land-thumb.webp', 2),
+    (17, 'image', 'Concept Art: Growth Stages for Crops and Animals with Need Indicators', '/images/projects/animal-farm/03-growth-stages.webp', '/images/projects/animal-farm/03-growth-stages-thumb.webp', 3),
+    (17, 'image', 'Concept Art: Build Mode, Barn, Warehouse, Feed Trough, Sprinkler, Plots, and Pens', '/images/projects/animal-farm/04-build-mode.webp', '/images/projects/animal-farm/04-build-mode-thumb.webp', 4),
+    (17, 'image', 'Concept Art: Shop, Inventory, and Barn Storage Screens', '/images/projects/animal-farm/05-shop-inventory.webp', '/images/projects/animal-farm/05-shop-inventory-thumb.webp', 5),
+    (17, 'image', 'Concept Art: The Farm from Dawn to Night', '/images/projects/animal-farm/06-day-night.webp', '/images/projects/animal-farm/06-day-night-thumb.webp', 6);
