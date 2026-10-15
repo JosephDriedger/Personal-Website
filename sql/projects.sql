@@ -43,7 +43,7 @@ Built with a Node.js and Express backend, EJS templates, and a MySQL database, w
         '/images/projects/personal-website/01-home.webp',
         '/images/projects/personal-website/01-home-thumb.webp',
         TRUE,
-        3
+        4
     ),
     (
         'Flank: Capture the Flag',
@@ -64,7 +64,7 @@ Built in Unity with C# gameplay logic and custom UI designed for strategic play.
         '/images/projects/flank/01-gameplay-board.webp',
         '/images/projects/flank/01-gameplay-board-thumb.webp',
         TRUE,
-        4
+        5
     ),
     (
         'Echoes of the Forgotten Keep',
@@ -85,7 +85,7 @@ Built on a custom C++20 game engine written from scratch rather than an off-the-
         '/images/projects/echoes/01-dungeon.webp',
         '/images/projects/echoes/01-dungeon-thumb.webp',
         TRUE,
-        1
+        2
     ),
     (
         'Call of Cthulhu',
@@ -106,7 +106,7 @@ Built in Unity 6 with the Universal Render Pipeline and C#, using Game Creator f
         '/images/projects/call-of-cthulhu/01-statue-puzzle.webp',
         '/images/projects/call-of-cthulhu/01-statue-puzzle-thumb.webp',
         TRUE,
-        2
+        3
     ),
     (
         'Inertia Pause',
@@ -127,7 +127,7 @@ Built by a team in Unity with C#. My role was sourcing and designing the assets:
         '/images/projects/inertia-pause/01-bridge.webp',
         '/images/projects/inertia-pause/01-bridge-thumb.webp',
         TRUE,
-        6
+        7
     ),
     (
         'Wayfindr Campus Navigation App',
@@ -148,7 +148,7 @@ Built on a Node.js and Express backend with EJS-rendered pages and Mapbox GL JS 
         '/images/projects/wayfindr/01-directions.webp',
         '/images/projects/wayfindr/01-directions-thumb.webp',
         FALSE,
-        5
+        6
     ),
     (
         'MelodiProof AI',
@@ -169,7 +169,7 @@ A convolutional neural network (CNN) classifies mel spectrograms of the audio, p
         '/images/projects/melodiproof/01-ai-detected.webp',
         '/images/projects/melodiproof/01-ai-detected-thumb.webp',
         FALSE,
-        8
+        9
     ),
     (
         'UCM BCIT Website',
@@ -190,7 +190,7 @@ Built on a Node.js and Express backend with HTML, CSS, and JavaScript on the fro
         '/images/projects/ucm-bcit/01-home.webp',
         '/images/projects/ucm-bcit/01-home-thumb.webp',
         FALSE,
-        11
+        12
     ),
     (
         'Abalone Game',
@@ -211,7 +211,7 @@ Built by a team of four in Python 3.11, with Pygame for rendering and Photoshop 
         '/images/projects/abalone/01-ai-battle.webp',
         '/images/projects/abalone/01-ai-battle-thumb.webp',
         FALSE,
-        10
+        11
     ),
     (
         'Commute! App',
@@ -232,7 +232,7 @@ Built with a team of three students. The front end is plain HTML, CSS, and JavaS
         '/images/projects/commute/01-landing.webp',
         '/images/projects/commute/01-landing-thumb.webp',
         FALSE,
-        12
+        13
     ),
     (
         'Ecocities Industry Project',
@@ -253,7 +253,7 @@ Built as a Next.js frontend backed by a MongoDB database that is populated throu
         '/images/projects/ecocities/01-emissions.webp',
         '/images/projects/ecocities/01-emissions-thumb.webp',
         FALSE,
-        7
+        8
     ),
     (
         'Webmainland Media Project',
@@ -274,7 +274,7 @@ A Python API handles the matching logic, while a Next.js frontend presents the p
         '/images/projects/webmainland/01-overview.webp',
         '/images/projects/webmainland/01-overview-thumb.webp',
         FALSE,
-        9
+        10
     ),
     (
         'Lock-in'' Ringers Website',
@@ -286,16 +286,16 @@ Built on a Node.js and Express backend with EJS layouts and partials, and hand-w
         'personal',
         'website',
         'Developer',
-        'in-progress',
+        'completed',
         '2025-02-22',
-        NULL,
+        '2026-09-24',
         'https://github.com/JosephDriedger/Lockin-Ringers',
         NULL,
         'https://lockinringers.ca/',
         '/images/projects/lockin-ringers/01-home.webp',
         '/images/projects/lockin-ringers/01-home-thumb.webp',
         FALSE,
-        16
+        1
     ),
     (
         'Covenant Night',
@@ -337,7 +337,7 @@ Built solo as my BCIT capstone in Unreal Engine 5 and C++, and currently in pre-
         '/images/projects/open-stance/01-competition-arena.webp',
         '/images/projects/open-stance/01-competition-arena-thumb.webp',
         FALSE,
-        14
+        15
     ),
     (
         'Dawn Beyond Death',
@@ -358,7 +358,7 @@ Built solo in Unreal Engine 5 with C++ for the systems, characters, worlds, and 
         '/images/projects/dawn-beyond-death/01-resurrection.webp',
         '/images/projects/dawn-beyond-death/01-resurrection-thumb.webp',
         FALSE,
-        15
+        16
     ),
     (
         'Animal Farm',
@@ -379,7 +379,7 @@ Built by a team of three in Unreal Engine 5, with GitHub for version control and
         '/images/projects/animal-farm/01-farm-overview.webp',
         '/images/projects/animal-farm/01-farm-overview-thumb.webp',
         FALSE,
-        13
+        14
     );
 
 INSERT INTO PROJECT_TECH (PROJECT_ID, TECH_NAME, DISPLAY_ORDER)
