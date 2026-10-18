@@ -337,7 +337,7 @@ Built solo as my BCIT capstone in Unreal Engine 5 and C++, and currently in pre-
         '/images/projects/open-stance/01-competition-arena.webp',
         '/images/projects/open-stance/01-competition-arena-thumb.webp',
         FALSE,
-        15
+        16
     ),
     (
         'Dawn Beyond Death',
@@ -358,7 +358,7 @@ Built solo in Unreal Engine 5 with C++ for the systems, characters, worlds, and 
         '/images/projects/dawn-beyond-death/01-resurrection.webp',
         '/images/projects/dawn-beyond-death/01-resurrection-thumb.webp',
         FALSE,
-        16
+        17
     ),
     (
         'Animal Farm',
@@ -380,6 +380,27 @@ Built by a team of three in Unreal Engine 5, with GitHub for version control and
         '/images/projects/animal-farm/01-farm-overview-thumb.webp',
         FALSE,
         14
+    ),
+    (
+        'Barbershop Learning Tracks Generator',
+        'barbershop-learning-tracks-generator',
+        'Windows desktop app that turns a four-part MusicXML score into 13 barbershop learning tracks, built with Python, PySide6, and OpenUtau.',
+        'The Barbershop Learning Tracks Generator (BLT Music Generator) is a Windows desktop app that makes learning tracks for barbershop quartets. You give it a four-part TTBB score exported from MuseScore as MusicXML, assign its parts to Tenor, Lead, Baritone, and Bass, pick a singing voice for each part, and it produces 13 synchronized tracks: the full quartet, plus a predominant, a solo, and a without track for each voice part, as WAV or MP3. Singers can then learn their own line against the other three parts, or sing it with the missing voice filled in.
+
+It is built in Python 3.12 with a PySide6 GUI and a command line. The score is parsed and validated first, with a readiness check that explains problems in plain language, a lyric review for notes that follow another part, and a pronunciation review for words the dictionary lacks. Each part is then rendered once through OpenUtau''s singing engine, run headless through a small C# host with a voicebank you provide, and a deterministic mixer builds all 13 tracks from those four stems with fixed gains and a checksummed manifest. A per-user Windows installer is built with Inno Setup, and the project has a large automated test suite. It is pre-release and still in active development, with musical acceptance testing against a real English voicebank outstanding.',
+        'personal',
+        'app',
+        'Developer',
+        'in-progress',
+        '2026-10-06',
+        NULL,
+        'https://github.com/JosephDriedger/Barbershop-Learning-Tracks-Generator',
+        NULL,
+        NULL,
+        '/images/projects/barbershop-tracks/01-main-window.webp',
+        '/images/projects/barbershop-tracks/01-main-window-thumb.webp',
+        FALSE,
+        15
     );
 
 INSERT INTO PROJECT_TECH (PROJECT_ID, TECH_NAME, DISPLAY_ORDER)
@@ -479,7 +500,13 @@ VALUES
     (16, 'Python', 4),
     -- 17: Animal Farm
     (17, 'Unreal Engine', 1),
-    (17, 'Git', 2);
+    (17, 'Git', 2),
+    -- 18: Barbershop Learning Tracks Generator
+    (18, 'Python', 1),
+    (18, 'PySide6', 2),
+    (18, 'C#', 3),
+    (18, 'OpenUtau', 4),
+    (18, 'Git', 5);
 
 INSERT INTO PROJECT_MEDIA (
         PROJECT_ID,
@@ -578,4 +605,6 @@ VALUES
     (17, 'image', 'Concept Art: Growth Stages for Crops and Animals with Need Indicators', '/images/projects/animal-farm/03-growth-stages.webp', '/images/projects/animal-farm/03-growth-stages-thumb.webp', 3),
     (17, 'image', 'Concept Art: Build Mode, Barn, Warehouse, Feed Trough, Sprinkler, Plots, and Pens', '/images/projects/animal-farm/04-build-mode.webp', '/images/projects/animal-farm/04-build-mode-thumb.webp', 4),
     (17, 'image', 'Concept Art: Shop, Inventory, and Barn Storage Screens', '/images/projects/animal-farm/05-shop-inventory.webp', '/images/projects/animal-farm/05-shop-inventory-thumb.webp', 5),
-    (17, 'image', 'Concept Art: The Farm from Dawn to Night', '/images/projects/animal-farm/06-day-night.webp', '/images/projects/animal-farm/06-day-night-thumb.webp', 6);
+    (17, 'image', 'Concept Art: The Farm from Dawn to Night', '/images/projects/animal-farm/06-day-night.webp', '/images/projects/animal-farm/06-day-night-thumb.webp', 6),
+    (18, 'image', 'Main Window, Score Loaded, Voices Assigned to Tenor, Lead, Baritone, and Bass', '/images/projects/barbershop-tracks/01-main-window.webp', '/images/projects/barbershop-tracks/01-main-window-thumb.webp', 1),
+    (18, 'image', 'Lyric Review, Notes That Follow the Lead''s Words', '/images/projects/barbershop-tracks/02-lyric-review.webp', '/images/projects/barbershop-tracks/02-lyric-review-thumb.webp', 2);
