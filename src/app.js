@@ -6,6 +6,7 @@ const projectRoutes = require("./routes/projects");
 const videoRoutes = require("./routes/videos");
 const contactRoutes = require("./routes/contact");
 const dashboardRouter = require("./dashboard/router");
+const { UPLOAD_DIR, UPLOAD_URL } = require("./config/uploads");
 
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
@@ -51,6 +52,19 @@ app.use((req, res, next) =>
 
     return host === dashboardHost ? dashboardRouter(req, res, next) : next();
 });
+
+/*
+Dashboard uploads (kept outside public/ so deploys never touch them)
+Random file names never change, so browsers may cache them for a long time.
+*/
+app.use(UPLOAD_URL, express.static(UPLOAD_DIR, {
+    index: false,
+    redirect: false,
+    dotfiles: "ignore",
+    maxAge: "30d",
+    immutable: true,
+    setHeaders: (res) => res.set("X-Content-Type-Options", "nosniff")
+}));
 
 /*
 Static Files

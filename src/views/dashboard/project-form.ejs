@@ -7,7 +7,7 @@ const val = (name) => (project[name] === null || project[name] === undefined) ? 
     <a class="btn btn-ghost" href="/projects">Back to projects</a>
 </div>
 <% if (Object.keys(errors).length) { %><p class="error" role="alert">Please fix the highlighted fields.</p><% } %>
-<form method="POST" action="<%= action %>" class="card form-grid" novalidate>
+<form method="POST" action="<%= action %>" enctype="multipart/form-data" class="card form-grid" novalidate>
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
     <div class="field wide">
@@ -105,6 +105,13 @@ const val = (name) => (project[name] === null || project[name] === undefined) ? 
     </div>
 
     <div class="field wide">
+        <label for="imageFile">Upload main image <span class="muted">(replaces the main image and thumbnail below; JPEG, PNG, WebP or GIF, 6 MB max)</span></label>
+        <% if (val('thumbnail') || val('image')) { %><img class="preview" src="<%= val('thumbnail') || val('image') %>" alt="Current main image"><% } %>
+        <input type="file" id="imageFile" name="imageFile" accept="image/jpeg,image/png,image/webp,image/gif">
+        <% if (errors.imageFile) { %><small class="error"><%= errors.imageFile %></small><% } %>
+    </div>
+
+    <div class="field wide">
         <label for="image">Main image path</label>
         <input type="text" id="image" name="image" value="<%= val('image') %>" maxlength="255" placeholder="/images/projects/my-project/01-home.webp">
         <% if (errors.image) { %><small class="error"><%= errors.image %></small><% } %>
@@ -126,6 +133,12 @@ const val = (name) => (project[name] === null || project[name] === undefined) ? 
         <label for="media">Screenshots <span class="muted">(one per line: Title | image path | thumbnail path)</span></label>
         <textarea id="media" name="media" rows="8" class="mono"><%= project.mediaText %></textarea>
         <% if (errors.media) { %><small class="error"><%= errors.media %></small><% } %>
+    </div>
+
+    <div class="field wide">
+        <label for="screenshotFiles">Upload screenshots <span class="muted">(added to the list above; up to 8 at a time, titled from the file name, which you can edit after saving)</span></label>
+        <input type="file" id="screenshotFiles" name="screenshotFiles" accept="image/jpeg,image/png,image/webp,image/gif" multiple>
+        <% if (errors.screenshotFiles) { %><small class="error"><%= errors.screenshotFiles %></small><% } %>
     </div>
 
     <div class="wide form-actions">

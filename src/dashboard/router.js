@@ -1,14 +1,34 @@
 const path = require("path");
 const express = require("express");
+const multer = require("multer");
 const rateLimit = require("express-rate-limit");
 
 const auth = require("./auth");
+const images = require("./images");
 const model = require("./model");
 const validation = require("./validation");
+const { UPLOAD_DIR, UPLOAD_URL } = require("../config/uploads");
 
 const router = express.Router();
 
+const MAX_FILE_BYTES = 6 * 1024 * 1024;
+const MAX_SCREENSHOTS = 8;
+const MAX_LIBRARY_UPLOADS = 10;
+
+// Files are held in memory only long enough to be re-encoded by sharp (images.js).
+const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: { fileSize: MAX_FILE_BYTES, files: 1 + MAX_SCREENSHOTS + MAX_LIBRARY_UPLOADS, fields: 80, fieldSize: 100 * 1024, parts: 120 }
+}).fields([
+    { name: "imageFile", maxCount: 1 },
+    { name: "screenshotFiles", maxCount: MAX_SCREENSHOTS },
+    { name: "files", maxCount: MAX_LIBRARY_UPLOADS }
+]);
+
 const MESSAGES = {
+    "images-uploaded": "Images uploaded.",
+    "image-deleted": "Image deleted.",
+    "image-in-use": "That image is used by a project, so it was not deleted. Remove it from the project first.",
     "project-created": "Project created.",
     "project-saved": "Project saved.",
     "project-deleted": "Project deleted.",
@@ -85,6 +105,9 @@ router.use((req, res, next) => (auth.isEnabled() ? next() : res.status(404).send
 
 router.use(auth.securityHeaders);
 router.use("/static", express.static(path.join(__dirname, "static"), { maxAge: 0 }));
+// Public images, so the dashboard can preview them. Never executed, only served as-is.
+router.use(UPLOAD_URL, express.static(UPLOAD_DIR, { index: false, redirect: false, dotfiles: "ignore" }));
+router.use("/images", express.static(path.join(__dirname, "../../public/images"), { index: false, redirect: false, dotfiles: "ignore" }));
 router.use(auth.loadSession);
 
 /*
@@ -157,6 +180,32 @@ router.post("/logout", auth.requireLogin, auth.requireCsrf, (req, res) =>
 Everything below needs a signed-in session and a valid CSRF token on writes.
 */
 router.use(auth.requireLogin);
+
+// Multipart bodies (file uploads) must be parsed before the CSRF token can be read.
+// Only signed-in sessions reach this point, and size limits are enforced above.
+router.use((req, res, next) =>
+{
+    if (!req.is("multipart/form-data"))
+    {
+        return next();
+    }
+
+    upload(req, res, (error) =>
+    {
+        if (!error)
+        {
+            return next();
+        }
+
+        const message = error.code === "LIMIT_FILE_SIZE"
+            ? `Each image must be ${MAX_FILE_BYTES / 1024 / 1024} MB or smaller.`
+            : "That upload was rejected (too many files, or an unexpected field).";
+
+        res.status(400);
+        render(req, res, "error", { title: "Upload rejected", message });
+    });
+});
+
 router.use(auth.requireCsrf);
 
 router.get("/", wrap(async (req, res) =>
@@ -208,29 +257,66 @@ async function saveProject(req, res, id)
         return rerender(400);
     }
 
+    const written = [];
+    const toSave = { ...values, media: [...values.media] };
+
     try
     {
+        const files = req.files || {};
+        const mainFile = (files.imageFile || [])[0];
+        const screenshots = files.screenshotFiles || [];
+
+        if (mainFile)
+        {
+            const saved = await images.processImage(mainFile.buffer, values.slug);
+            written.push(saved.name, thumbOf(saved.name));
+            toSave.image = saved.url;
+            toSave.thumbnail = saved.thumbnail;
+        }
+
+        if (toSave.media.length + screenshots.length > validation.MAX_MEDIA)
+        {
+            return rerender(400, { screenshotFiles: `A project can have at most ${validation.MAX_MEDIA} screenshots.` });
+        }
+
+        for (const file of screenshots)
+        {
+            const title = screenshotTitle(file.originalname);
+            const saved = await images.processImage(file.buffer, `${values.slug}-${title}`);
+            written.push(saved.name, thumbOf(saved.name));
+            toSave.media.push({ title, url: saved.url, thumbnail: saved.thumbnail });
+        }
+
         if (isNew)
         {
-            const newId = await model.createProject(values);
-            audit(req, `project created id=${newId} slug=${values.slug}`);
+            const newId = await model.createProject(toSave);
+            audit(req, `project created id=${newId} slug=${values.slug} uploads=${written.length / 2}`);
 
             return res.redirect("/projects?msg=project-created");
         }
 
-        const updated = await model.updateProject(id, values);
+        const updated = await model.updateProject(id, toSave);
 
         if (!updated)
         {
+            await images.removeFiles(written);
+
             return res.status(404).send("Not found");
         }
 
-        audit(req, `project updated id=${id}`);
+        audit(req, `project updated id=${id} uploads=${written.length / 2}`);
 
         return res.redirect("/projects?msg=project-saved");
     }
     catch (error)
     {
+        await images.removeFiles(written).catch(() => {});
+
+        if (error instanceof images.ImageError)
+        {
+            return rerender(400, { imageFile: `${error.message} Choose the image(s) again.` });
+        }
+
         if (model.isDuplicate(error))
         {
             return rerender(409, { slug: "Another project already uses this slug." });
@@ -239,6 +325,17 @@ async function saveProject(req, res, id)
         throw error;
     }
 }
+
+const thumbOf = (name) => name.replace(/\.webp$/, "-thumb.webp");
+
+// "my_cool-shot.PNG" -> "my cool shot"
+const screenshotTitle = (filename) =>
+    String(filename || "")
+        .replace(/\.[^.]*$/, "")
+        .replace(/[-_]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, 100) || "Screenshot";
 
 router.post("/projects", wrap((req, res) => saveProject(req, res, null)));
 
@@ -279,6 +376,85 @@ router.post("/projects/:id/delete", wrap(async (req, res) =>
 
     audit(req, `project deleted id=${id}`);
     res.redirect("/projects?msg=project-deleted");
+}));
+
+/*
+Image library
+*/
+async function renderImages(req, res, status = 200, extra = {})
+{
+    const [uploads, used] = await Promise.all([images.listUploads(), model.usedImageUrls()]);
+
+    res.status(status);
+    render(req, res, "images", {
+        title: "Images",
+        uploads: uploads.map((item) => ({ ...item, inUse: used.has(item.url) || used.has(item.thumbnail) })),
+        maxMb: MAX_FILE_BYTES / 1024 / 1024,
+        maxFiles: MAX_LIBRARY_UPLOADS,
+        ...extra
+    });
+}
+
+router.get("/images", wrap((req, res) => renderImages(req, res)));
+
+router.post("/images", wrap(async (req, res) =>
+{
+    const files = (req.files && req.files.files) || [];
+    const problems = [];
+    let saved = 0;
+
+    if (files.length === 0)
+    {
+        return renderImages(req, res, 400, { problems: ["Choose at least one image."] });
+    }
+
+    for (const file of files)
+    {
+        try
+        {
+            await images.processImage(file.buffer, screenshotTitle(file.originalname));
+            saved += 1;
+        }
+        catch (error)
+        {
+            if (!(error instanceof images.ImageError))
+            {
+                throw error;
+            }
+
+            problems.push(`${screenshotTitle(file.originalname)}: ${error.message}`);
+        }
+    }
+
+    audit(req, `images uploaded ok=${saved} rejected=${problems.length}`);
+
+    if (problems.length > 0)
+    {
+        return renderImages(req, res, 400, { problems });
+    }
+
+    res.redirect("/images?msg=images-uploaded");
+}));
+
+router.post("/images/:name/delete", wrap(async (req, res) =>
+{
+    const name = String(req.params.name);
+
+    if (!images.STORED_NAME.test(name) || name.endsWith("-thumb.webp"))
+    {
+        return res.status(404).send("Not found");
+    }
+
+    const used = await model.usedImageUrls();
+
+    if (used.has(`${UPLOAD_URL}/${name}`) || used.has(`${UPLOAD_URL}/${thumbOf(name)}`))
+    {
+        return res.redirect("/images?msg=image-in-use");
+    }
+
+    await images.deleteUpload(name);
+    audit(req, `image deleted name=${name}`);
+    res.redirect("/images?msg=image-deleted");
 }));
 
 /*

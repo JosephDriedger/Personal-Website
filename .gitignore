@@ -128,3 +128,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Dashboard uploads (set UPLOAD_DIR on the server)
+/uploads/

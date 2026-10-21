@@ -309,6 +309,7 @@ function validateProject(body)
 }
 
 module.exports = {
+    MAX_MEDIA,
     CATEGORIES,
     TYPES,
     STATUSES,

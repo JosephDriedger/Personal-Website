@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const db = require("../config/db");
+const { UPLOAD_DIR, UPLOAD_URL } = require("../config/uploads");
 
 const publicDir = path.join(__dirname, "../../public");
 
@@ -293,6 +294,14 @@ const resolveImage = (imagePath) =>
     }
 
     const url = value.startsWith("/") ? value : `/images/projects/${value}`;
+
+    // Dashboard uploads live outside /public (see config/uploads.js).
+    if (url.startsWith(`${UPLOAD_URL}/`))
+    {
+        const file = path.basename(url);
+
+        return file === url.slice(UPLOAD_URL.length + 1) && fs.existsSync(path.join(UPLOAD_DIR, file)) ? url : null;
+    }
 
     return fs.existsSync(path.join(publicDir, url)) ? url : null;
 };

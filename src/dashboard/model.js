@@ -221,3 +221,17 @@ exports.deleteVideo = async (id) =>
 
     return result.affectedRows > 0;
 };
+
+// Every image path currently referenced by a project, so the dashboard can show
+// which uploads are in use and refuse to delete those.
+exports.usedImageUrls = async () =>
+{
+    const [rows] = await db.query(`
+        SELECT IMAGE_URL AS url FROM PROJECTS WHERE IMAGE_URL IS NOT NULL
+        UNION SELECT THUMBNAIL_URL FROM PROJECTS WHERE THUMBNAIL_URL IS NOT NULL
+        UNION SELECT URL FROM PROJECT_MEDIA
+        UNION SELECT THUMBNAIL_URL FROM PROJECT_MEDIA WHERE THUMBNAIL_URL IS NOT NULL
+    `);
+
+    return new Set(rows.map((row) => row.url));
+};

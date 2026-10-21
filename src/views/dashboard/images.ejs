@@ -1,0 +1,41 @@
+<%- include('_head') %>
+<div class="page-head"><h1>Images</h1></div>
+
+<form method="POST" action="/images" enctype="multipart/form-data" class="card" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <h2>Upload images</h2>
+    <p class="muted">JPEG, PNG, WebP or GIF, up to <%= maxMb %> MB each and <%= maxFiles %> at a time. They are resized, converted to WebP and given a thumbnail. Use the paths below in a project, or upload straight from the project form.</p>
+    <% if (typeof problems !== 'undefined' && problems.length) { %>
+        <ul class="error" role="alert"><% problems.forEach(problem => { %><li><%= problem %></li><% }) %></ul>
+    <% } %>
+    <div class="video-row">
+        <div class="field">
+            <label for="files">Images</label>
+            <input type="file" id="files" name="files" accept="image/jpeg,image/png,image/webp,image/gif" multiple required>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </div>
+</form>
+
+<div class="card">
+    <h2>Uploaded images (<%= uploads.length %>)</h2>
+    <% if (!uploads.length) { %><p class="muted">Nothing uploaded yet.</p><% } %>
+    <div class="image-grid">
+    <% uploads.forEach(item => { %>
+        <div class="image-item">
+            <img src="<%= item.thumbnail %>" alt="" loading="lazy">
+            <div class="small mono"><%= item.url %></div>
+            <div class="small mono muted"><%= item.thumbnail %></div>
+            <div class="small muted"><%= Math.round(item.size / 1024) %> KB<%= item.inUse ? ' · in use' : '' %></div>
+            <% if (!item.inUse) { %>
+            <form method="POST" action="/images/<%= item.name %>/delete" class="inline"
+                  data-confirm="Delete this image? This cannot be undone.">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <% } %>
+        </div>
+    <% }) %>
+    </div>
+</div>
+<%- include('_foot') %>

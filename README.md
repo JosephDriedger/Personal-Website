@@ -79,6 +79,7 @@ CONTACT_TO_EMAIL=you@example.com
 # Dashboard (optional; it stays switched off without a hash)
 DASHBOARD_PASSWORD_HASH='scrypt$...'      # generate with: npm run dashboard:hash
 DASHBOARD_HOST=dashboard.joeydriedger.ca  # defaults to dashboard.localhost outside production
+UPLOAD_DIR=/home/admin/uploads            # where dashboard image uploads are stored (default: ./uploads)
 ```
 
 ### Running
@@ -110,6 +111,7 @@ A private admin dashboard for adding, editing and deleting projects and music vi
 - **Locally:** set `ALLOW_DEV_DB=true`, run `npm run dev`, and open `http://dashboard.localhost:3000`.
 - **Password:** run `npm run dashboard:hash`, put the printed `DASHBOARD_PASSWORD_HASH` line in `.env`, and restart. With no hash set, the dashboard returns 404.
 - **Security:** scrypt-hashed password, rate-limited login (8 failures per 15 minutes per IP), server-side sessions in a `__Host-` cookie (HttpOnly, Secure, SameSite=Strict, 30-minute idle / 8-hour absolute timeout), a CSRF token plus Origin check on every write, parameterised SQL only, strict input validation (http(s) links only, image paths confined to `/images/`), a locked-down Content-Security-Policy, and an audit line in the app log for every login and change.
+- **Image uploads:** images can be uploaded from the project form or the Images page. Each file is decoded, checked to be a real JPEG/PNG/WebP/GIF (SVG and everything else is refused), size-limited (6 MB, 40 megapixels), stripped of EXIF metadata, resized, and re-encoded as WebP with a thumbnail under a generated file name. They are stored in `UPLOAD_DIR` (outside the git checkout, so deploys never touch them; include it in backups) and served at `/images/uploads/`.
 - **Production setup:** needs a DNS record and an nginx server block + TLS certificate for the subdomain, plus the `DASHBOARD_PASSWORD_HASH` line in the server's `.env`.
 - **Tests:** `npm test`.
 
