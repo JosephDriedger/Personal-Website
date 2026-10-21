@@ -75,6 +75,10 @@ ALLOW_DEV_DB=false
 RESEND_API_KEY=your-resend-api-key
 SMTP_FROM=contact@joeydriedger.ca
 CONTACT_TO_EMAIL=you@example.com
+
+# Dashboard (optional; it stays switched off without a hash)
+DASHBOARD_PASSWORD_HASH='scrypt$...'      # generate with: npm run dashboard:hash
+DASHBOARD_HOST=dashboard.joeydriedger.ca  # defaults to dashboard.localhost outside production
 ```
 
 ### Running
@@ -98,6 +102,16 @@ npm start
 | `GET /projects` | Projects list with filters |
 | `GET /videos` | Videos list with filters |
 | `POST /contact` | Contact form submission |
+
+## Dashboard
+
+A private admin dashboard for adding, editing and deleting projects and music videos lives on its own subdomain, `dashboard.joeydriedger.ca`. It is served from the same Node process, but only for requests whose `Host` header matches `DASHBOARD_HOST`; the public site never serves it.
+
+- **Locally:** set `ALLOW_DEV_DB=true`, run `npm run dev`, and open `http://dashboard.localhost:3000`.
+- **Password:** run `npm run dashboard:hash`, put the printed `DASHBOARD_PASSWORD_HASH` line in `.env`, and restart. With no hash set, the dashboard returns 404.
+- **Security:** scrypt-hashed password, rate-limited login (8 failures per 15 minutes per IP), server-side sessions in a `__Host-` cookie (HttpOnly, Secure, SameSite=Strict, 30-minute idle / 8-hour absolute timeout), a CSRF token plus Origin check on every write, parameterised SQL only, strict input validation (http(s) links only, image paths confined to `/images/`), a locked-down Content-Security-Policy, and an audit line in the app log for every login and change.
+- **Production setup:** needs a DNS record and an nginx server block + TLS certificate for the subdomain, plus the `DASHBOARD_PASSWORD_HASH` line in the server's `.env`.
+- **Tests:** `npm test`.
 
 ## Notes
 

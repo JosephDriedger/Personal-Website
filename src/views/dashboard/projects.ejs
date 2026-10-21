@@ -1,0 +1,33 @@
+<%- include('_head') %>
+<div class="page-head">
+    <h1>Projects</h1>
+    <a class="btn btn-primary" href="/projects/new">Add project</a>
+</div>
+<div class="card table-wrap">
+    <table>
+        <thead>
+            <tr><th>Title</th><th>Type</th><th>Category</th><th>Status</th><th>Featured</th><th></th></tr>
+        </thead>
+        <tbody>
+        <% projects.forEach(project => { %>
+            <tr>
+                <td><a href="/projects/<%= project.id %>/edit"><%= project.title %></a><div class="muted small"><%= project.slug %></div></td>
+                <td><%= project.type %></td>
+                <td><%= project.category %></td>
+                <td><%= project.status %></td>
+                <td><%= project.isFeatured ? 'Yes' : '' %></td>
+                <td class="actions">
+                    <a class="btn btn-ghost" href="/projects/<%= project.id %>/edit">Edit</a>
+                    <form method="POST" action="/projects/<%= project.id %>/delete" class="inline"
+                          data-confirm="Delete &quot;<%= project.title %>&quot; and its technologies and screenshots? This cannot be undone.">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+        <% if (!projects.length) { %><tr><td colspan="6" class="muted">No projects yet.</td></tr><% } %>
+        </tbody>
+    </table>
+</div>
+<%- include('_foot') %>

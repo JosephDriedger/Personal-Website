@@ -22,7 +22,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development ALLOW_DEV_DB=false nodemon ./src/server.js",
-    "start": "cross-env NODE_ENV=production node ./src/server.js"
+    "start": "cross-env NODE_ENV=production node ./src/server.js",
+    "dashboard:hash": "node ./scripts/hash-dashboard-password.js",
+    "test": "node --test \"tests/dashboard/*.test.js\""
   },
   "dependencies": {
     "cross-env": "^10.1.0",

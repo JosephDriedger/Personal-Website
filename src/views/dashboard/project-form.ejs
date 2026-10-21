@@ -1,0 +1,136 @@
+<%- include('_head') %>
+<%
+const val = (name) => (project[name] === null || project[name] === undefined) ? '' : project[name];
+%>
+<div class="page-head">
+    <h1><%= isNew ? 'Add project' : 'Edit project' %></h1>
+    <a class="btn btn-ghost" href="/projects">Back to projects</a>
+</div>
+<% if (Object.keys(errors).length) { %><p class="error" role="alert">Please fix the highlighted fields.</p><% } %>
+<form method="POST" action="<%= action %>" class="card form-grid" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <div class="field wide">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" value="<%= val('title') %>" maxlength="255" required>
+        <% if (errors.title) { %><small class="error"><%= errors.title %></small><% } %>
+    </div>
+
+    <div class="field wide">
+        <label for="slug">Slug <span class="muted">(URL name; leave blank to generate from the title)</span></label>
+        <input type="text" id="slug" name="slug" value="<%= val('slug') %>" maxlength="255">
+        <% if (errors.slug) { %><small class="error"><%= errors.slug %></small><% } %>
+    </div>
+
+    <div class="field wide">
+        <label for="shortDescription">Short description</label>
+        <input type="text" id="shortDescription" name="shortDescription" value="<%= val('shortDescription') %>" maxlength="255">
+        <% if (errors.shortDescription) { %><small class="error"><%= errors.shortDescription %></small><% } %>
+    </div>
+
+    <div class="field wide">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="7" maxlength="10000"><%= val('description') %></textarea>
+        <% if (errors.description) { %><small class="error"><%= errors.description %></small><% } %>
+    </div>
+
+    <div class="field">
+        <label for="category">Category</label>
+        <select id="category" name="category">
+            <% categories.forEach(option => { %><option value="<%= option %>" <%= val('category') === option ? 'selected' : '' %>><%= option %></option><% }) %>
+        </select>
+        <% if (errors.category) { %><small class="error"><%= errors.category %></small><% } %>
+    </div>
+
+    <div class="field">
+        <label for="type">Type</label>
+        <select id="type" name="type">
+            <% types.forEach(option => { %><option value="<%= option %>" <%= val('type') === option ? 'selected' : '' %>><%= option %></option><% }) %>
+        </select>
+        <% if (errors.type) { %><small class="error"><%= errors.type %></small><% } %>
+    </div>
+
+    <div class="field">
+        <label for="status">Status</label>
+        <select id="status" name="status">
+            <% statuses.forEach(option => { %><option value="<%= option %>" <%= val('status') === option ? 'selected' : '' %>><%= option %></option><% }) %>
+        </select>
+        <% if (errors.status) { %><small class="error"><%= errors.status %></small><% } %>
+    </div>
+
+    <div class="field">
+        <label for="role">Role</label>
+        <input type="text" id="role" name="role" value="<%= val('role') %>" maxlength="255">
+        <% if (errors.role) { %><small class="error"><%= errors.role %></small><% } %>
+    </div>
+
+    <div class="field">
+        <label for="startDate">Start date</label>
+        <input type="date" id="startDate" name="startDate" value="<%= val('startDate') %>">
+        <% if (errors.startDate) { %><small class="error"><%= errors.startDate %></small><% } %>
+    </div>
+
+    <div class="field">
+        <label for="endDate">End date</label>
+        <input type="date" id="endDate" name="endDate" value="<%= val('endDate') %>">
+        <% if (errors.endDate) { %><small class="error"><%= errors.endDate %></small><% } %>
+    </div>
+
+    <div class="field">
+        <label for="displayOrder">Display order</label>
+        <input type="number" id="displayOrder" name="displayOrder" value="<%= val('displayOrder') %>" min="0" max="9999">
+        <% if (errors.displayOrder) { %><small class="error"><%= errors.displayOrder %></small><% } %>
+    </div>
+
+    <div class="field check">
+        <label><input type="checkbox" name="isFeatured" <%= project.isFeatured ? 'checked' : '' %>> Featured</label>
+    </div>
+
+    <div class="field wide">
+        <label for="github">GitHub link</label>
+        <input type="url" id="github" name="github" value="<%= val('github') %>" maxlength="255" placeholder="https://github.com/...">
+        <% if (errors.github) { %><small class="error"><%= errors.github %></small><% } %>
+    </div>
+
+    <div class="field wide">
+        <label for="demo">Demo / download link</label>
+        <input type="url" id="demo" name="demo" value="<%= val('demo') %>" maxlength="255">
+        <% if (errors.demo) { %><small class="error"><%= errors.demo %></small><% } %>
+    </div>
+
+    <div class="field wide">
+        <label for="website">Website link</label>
+        <input type="url" id="website" name="website" value="<%= val('website') %>" maxlength="255">
+        <% if (errors.website) { %><small class="error"><%= errors.website %></small><% } %>
+    </div>
+
+    <div class="field wide">
+        <label for="image">Main image path</label>
+        <input type="text" id="image" name="image" value="<%= val('image') %>" maxlength="255" placeholder="/images/projects/my-project/01-home.webp">
+        <% if (errors.image) { %><small class="error"><%= errors.image %></small><% } %>
+    </div>
+
+    <div class="field wide">
+        <label for="thumbnail">Thumbnail path</label>
+        <input type="text" id="thumbnail" name="thumbnail" value="<%= val('thumbnail') %>" maxlength="255" placeholder="/images/projects/my-project/01-home-thumb.webp">
+        <% if (errors.thumbnail) { %><small class="error"><%= errors.thumbnail %></small><% } %>
+    </div>
+
+    <div class="field wide">
+        <label for="technologies">Technologies <span class="muted">(one per line, or comma separated)</span></label>
+        <textarea id="technologies" name="technologies" rows="4"><%= project.technologiesText %></textarea>
+        <% if (errors.technologies) { %><small class="error"><%= errors.technologies %></small><% } %>
+    </div>
+
+    <div class="field wide">
+        <label for="media">Screenshots <span class="muted">(one per line: Title | image path | thumbnail path)</span></label>
+        <textarea id="media" name="media" rows="8" class="mono"><%= project.mediaText %></textarea>
+        <% if (errors.media) { %><small class="error"><%= errors.media %></small><% } %>
+    </div>
+
+    <div class="wide form-actions">
+        <button type="submit" class="btn btn-primary"><%= isNew ? 'Create project' : 'Save changes' %></button>
+        <a class="btn btn-ghost" href="/projects">Cancel</a>
+    </div>
+</form>
+<%- include('_foot') %>

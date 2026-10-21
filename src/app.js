@@ -5,11 +5,24 @@ const indexRoutes = require("./routes/index");
 const projectRoutes = require("./routes/projects");
 const videoRoutes = require("./routes/videos");
 const contactRoutes = require("./routes/contact");
+const dashboardRouter = require("./dashboard/router");
 
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
+
+// In production the app sits behind nginx, which sets X-Forwarded-For/-Proto.
+// Trusting exactly one hop gives rate limiting the real client IP.
+if (process.env.NODE_ENV === "production")
+{
+    app.set("trust proxy", 1);
+}
+
+const dashboardHost = (
+    process.env.DASHBOARD_HOST ||
+    (process.env.NODE_ENV === "production" ? "dashboard.joeydriedger.ca" : "dashboard.localhost")
+).toLowerCase();
 
 /*
 View Engine
@@ -25,6 +38,19 @@ Middleware
 */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+/*
+Dashboard
+Served only for requests to the dashboard subdomain. Matches the raw Host header
+(not X-Forwarded-Host, which a client could forge), and nothing from the public
+site is reachable on that host.
+*/
+app.use((req, res, next) =>
+{
+    const host = String(req.headers.host || "").split(":")[0].toLowerCase();
+
+    return host === dashboardHost ? dashboardRouter(req, res, next) : next();
+});
 
 /*
 Static Files
