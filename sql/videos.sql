@@ -23,4 +23,6 @@ INSERT INTO VIDEOS (TITLE, VIDEO_ID) VALUES
 ('Hello Mary Lou', 'u51UHwSW11g'),
 ('Let There Be Peace On Earth', 'soRO-1HMu6Q'),
 ('God Rest Ye Merry Gentlemen', '-oW-TNWJg74'),
-('No One Sings Higher Than Me', '7gpw5dnPYkQ');
+('No One Sings Higher Than Me', '7gpw5dnPYkQ'),
+('The Star-Spangled Banner', 'QGVs-uYeUHo'),
+('San Francisco Bay Blues', '3QpVrjFePGk');
