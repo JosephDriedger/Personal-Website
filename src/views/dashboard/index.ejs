@@ -1,8 +1,22 @@
 <%- include('_head') %>
 <h1>Overview</h1>
 <div class="stats">
+    <a class="card stat" href="/messages"><strong><%= unreadMessages %></strong><span>Unread Messages</span></a>
     <a class="card stat" href="/projects"><strong><%= projectCount %></strong><span>Projects</span></a>
-    <a class="card stat" href="/videos"><strong><%= videoCount %></strong><span>Music videos</span></a>
+    <a class="card stat" href="/videos"><strong><%= videoCount %></strong><span>Music Videos</span></a>
 </div>
+
+<div class="card">
+    <div class="page-head"><h2>Recent Messages</h2><a class="btn btn-ghost" href="/messages">View All</a></div>
+    <% recentMessages.forEach(item => { %>
+        <a class="recent <%= item.isRead ? '' : 'unread' %>" href="/messages/<%= item.id %>">
+            <span class="recent-from"><%= item.name %><% if (!item.isRead) { %> <span class="pill">New</span><% } %></span>
+            <span class="recent-text"><%= item.message.length > 110 ? item.message.slice(0, 110) + '…' : item.message %></span>
+            <span class="muted small"><%= formatDate(item.createdAt) %></span>
+        </a>
+    <% }) %>
+    <% if (!recentMessages.length) { %><p class="muted">No messages yet.</p><% } %>
+</div>
+
 <p class="muted">Changes go live on joeydriedger.ca immediately.</p>
 <%- include('_foot') %>

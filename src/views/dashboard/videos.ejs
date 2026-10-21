@@ -1,9 +1,9 @@
 <%- include('_head') %>
-<div class="page-head"><h1>Music videos</h1></div>
+<div class="page-head"><h1>Music Videos</h1></div>
 
 <form method="POST" action="/videos" class="card video-add" novalidate>
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-    <h2>Add a video</h2>
+    <h2>Add a Video</h2>
     <div class="video-row">
         <div class="field">
             <label for="new-title">Title</label>
@@ -11,7 +11,7 @@
             <% if (editingId === null && errors.title) { %><small class="error"><%= errors.title %></small><% } %>
         </div>
         <div class="field">
-            <label for="new-url">YouTube link or video ID</label>
+            <label for="new-url">YouTube Link or Video ID</label>
             <input type="text" id="new-url" name="url" value="<%= newVideo.url %>" maxlength="300" required placeholder="https://youtu.be/...">
             <% if (editingId === null && errors.url) { %><small class="error"><%= errors.url %></small><% } %>
         </div>
@@ -20,7 +20,7 @@
 </form>
 
 <div class="card">
-    <h2>All videos (<%= videos.length %>)</h2>
+    <h2>All Videos (<%= videos.length %>)</h2>
     <% videos.forEach(video => {
         const editing = editingId === video.id && typeof editValues !== 'undefined';
         const title = editing ? editValues.title : video.title;
@@ -35,7 +35,7 @@
                     <% if (editing && errors.title) { %><small class="error"><%= errors.title %></small><% } %>
                 </div>
                 <div class="field">
-                    <label for="url-<%= video.id %>">YouTube link or video ID</label>
+                    <label for="url-<%= video.id %>">YouTube Link or Video ID</label>
                     <input type="text" id="url-<%= video.id %>" name="url" value="<%= url %>" maxlength="300" required>
                     <% if (editing && errors.url) { %><small class="error"><%= errors.url %></small><% } %>
                 </div>

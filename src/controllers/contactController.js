@@ -1,4 +1,5 @@
 const contactService = require("../services/contactService");
+const contactMessageModel = require("../models/contactMessageModel");
 
 function isAjaxRequest(req)
 {
@@ -106,12 +107,16 @@ exports.submitContact = async (req, res) =>
     {
         errors.name = "Name is required.";
     }
+    else if (trimmedName.length > 100)
+    {
+        errors.name = "Name must be 100 characters or fewer.";
+    }
 
     if (!trimmedEmail)
     {
         errors.email = "Email is required.";
     }
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail))
+    else if (trimmedEmail.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail))
     {
         errors.email = "Enter a valid email address.";
     }
@@ -123,6 +128,10 @@ exports.submitContact = async (req, res) =>
     else if (trimmedMessage.length < 10)
     {
         errors.message = "Message must be at least 10 characters.";
+    }
+    else if (trimmedMessage.length > 5000)
+    {
+        errors.message = "Message must be 5,000 characters or fewer.";
     }
 
     if (Object.keys(errors).length > 0)
@@ -149,7 +158,35 @@ exports.submitContact = async (req, res) =>
             });
         }
 
-        await contactService.sendContactEmail(trimmedName, trimmedEmail, trimmedMessage);
+        // Save first so the message shows up in the dashboard even if the email
+        // provider is down. The visitor only sees an error if both fail.
+        let stored = false;
+        let emailed = false;
+
+        try
+        {
+            await contactMessageModel.create({ name: trimmedName, email: trimmedEmail, message: trimmedMessage });
+            stored = true;
+        }
+        catch (storeError)
+        {
+            console.error("Failed to store contact message:", storeError);
+        }
+
+        try
+        {
+            await contactService.sendContactEmail(trimmedName, trimmedEmail, trimmedMessage);
+            emailed = true;
+        }
+        catch (emailError)
+        {
+            console.error("Failed to email contact message:", emailError);
+        }
+
+        if (!stored && !emailed)
+        {
+            throw new Error("Contact message could neither be stored nor emailed.");
+        }
 
         return renderSuccessResponse(req, res, "Your message has been sent successfully.");
     }

@@ -3,7 +3,7 @@
 
 <form method="POST" action="/images" enctype="multipart/form-data" class="card" novalidate>
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-    <h2>Upload images</h2>
+    <h2>Upload Images</h2>
     <p class="muted">JPEG, PNG, WebP or GIF, up to <%= maxMb %> MB each and <%= maxFiles %> at a time. They are resized, converted to WebP and given a thumbnail. Use the paths below in a project, or upload straight from the project form.</p>
     <% if (typeof problems !== 'undefined' && problems.length) { %>
         <ul class="error" role="alert"><% problems.forEach(problem => { %><li><%= problem %></li><% }) %></ul>
@@ -18,7 +18,7 @@
 </form>
 
 <div class="card">
-    <h2>Uploaded images (<%= uploads.length %>)</h2>
+    <h2>Uploaded Images (<%= uploads.length %>)</h2>
     <% if (!uploads.length) { %><p class="muted">Nothing uploaded yet.</p><% } %>
     <div class="image-grid">
     <% uploads.forEach(item => { %>

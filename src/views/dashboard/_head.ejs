@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title><%= title %> | Dashboard</title>
+    <title><%= (typeof unreadMessages !== 'undefined' && unreadMessages > 0) ? '(' + unreadMessages + ') ' : '' %><%= title %> | Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,12 +17,13 @@
         <a class="brand" href="/">Dashboard</a>
         <nav>
             <a href="/projects">Projects</a>
-            <a href="/videos">Music videos</a>
+            <a href="/videos">Music Videos</a>
             <a href="/images">Images</a>
+            <a href="/messages">Messages <span class="badge<%= (typeof unreadMessages !== 'undefined' && unreadMessages > 0) ? '' : ' hidden' %>" id="unread-badge" data-count-url="/messages/count"><%= typeof unreadMessages !== 'undefined' ? unreadMessages : 0 %></span></a>
         </nav>
         <form method="POST" action="/logout" class="inline">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button type="submit" class="btn btn-ghost">Sign out</button>
+            <button type="submit" class="btn btn-ghost">Sign Out</button>
         </form>
     </div>
 </header>

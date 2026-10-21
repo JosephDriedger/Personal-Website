@@ -3,8 +3,8 @@
 const val = (name) => (project[name] === null || project[name] === undefined) ? '' : project[name];
 %>
 <div class="page-head">
-    <h1><%= isNew ? 'Add project' : 'Edit project' %></h1>
-    <a class="btn btn-ghost" href="/projects">Back to projects</a>
+    <h1><%= isNew ? 'Add Project' : 'Edit Project' %></h1>
+    <a class="btn btn-ghost" href="/projects">Back to Projects</a>
 </div>
 <% if (Object.keys(errors).length) { %><p class="error" role="alert">Please fix the highlighted fields.</p><% } %>
 <form method="POST" action="<%= action %>" enctype="multipart/form-data" class="card form-grid" novalidate>
@@ -23,7 +23,7 @@ const val = (name) => (project[name] === null || project[name] === undefined) ? 
     </div>
 
     <div class="field wide">
-        <label for="shortDescription">Short description</label>
+        <label for="shortDescription">Short Description</label>
         <input type="text" id="shortDescription" name="shortDescription" value="<%= val('shortDescription') %>" maxlength="255">
         <% if (errors.shortDescription) { %><small class="error"><%= errors.shortDescription %></small><% } %>
     </div>
@@ -65,19 +65,19 @@ const val = (name) => (project[name] === null || project[name] === undefined) ? 
     </div>
 
     <div class="field">
-        <label for="startDate">Start date</label>
+        <label for="startDate">Start Date</label>
         <input type="date" id="startDate" name="startDate" value="<%= val('startDate') %>">
         <% if (errors.startDate) { %><small class="error"><%= errors.startDate %></small><% } %>
     </div>
 
     <div class="field">
-        <label for="endDate">End date</label>
+        <label for="endDate">End Date</label>
         <input type="date" id="endDate" name="endDate" value="<%= val('endDate') %>">
         <% if (errors.endDate) { %><small class="error"><%= errors.endDate %></small><% } %>
     </div>
 
     <div class="field">
-        <label for="displayOrder">Display order</label>
+        <label for="displayOrder">Display Order</label>
         <input type="number" id="displayOrder" name="displayOrder" value="<%= val('displayOrder') %>" min="0" max="9999">
         <% if (errors.displayOrder) { %><small class="error"><%= errors.displayOrder %></small><% } %>
     </div>
@@ -87,38 +87,38 @@ const val = (name) => (project[name] === null || project[name] === undefined) ? 
     </div>
 
     <div class="field wide">
-        <label for="github">GitHub link</label>
+        <label for="github">GitHub Link</label>
         <input type="url" id="github" name="github" value="<%= val('github') %>" maxlength="255" placeholder="https://github.com/...">
         <% if (errors.github) { %><small class="error"><%= errors.github %></small><% } %>
     </div>
 
     <div class="field wide">
-        <label for="demo">Demo / download link</label>
+        <label for="demo">Demo / Download Link</label>
         <input type="url" id="demo" name="demo" value="<%= val('demo') %>" maxlength="255">
         <% if (errors.demo) { %><small class="error"><%= errors.demo %></small><% } %>
     </div>
 
     <div class="field wide">
-        <label for="website">Website link</label>
+        <label for="website">Website Link</label>
         <input type="url" id="website" name="website" value="<%= val('website') %>" maxlength="255">
         <% if (errors.website) { %><small class="error"><%= errors.website %></small><% } %>
     </div>
 
     <div class="field wide">
-        <label for="imageFile">Upload main image <span class="muted">(replaces the main image and thumbnail below; JPEG, PNG, WebP or GIF, 6 MB max)</span></label>
+        <label for="imageFile">Upload Main Image <span class="muted">(replaces the main image and thumbnail below; JPEG, PNG, WebP or GIF, 6 MB max)</span></label>
         <% if (val('thumbnail') || val('image')) { %><img class="preview" src="<%= val('thumbnail') || val('image') %>" alt="Current main image"><% } %>
         <input type="file" id="imageFile" name="imageFile" accept="image/jpeg,image/png,image/webp,image/gif">
         <% if (errors.imageFile) { %><small class="error"><%= errors.imageFile %></small><% } %>
     </div>
 
     <div class="field wide">
-        <label for="image">Main image path</label>
+        <label for="image">Main Image Path</label>
         <input type="text" id="image" name="image" value="<%= val('image') %>" maxlength="255" placeholder="/images/projects/my-project/01-home.webp">
         <% if (errors.image) { %><small class="error"><%= errors.image %></small><% } %>
     </div>
 
     <div class="field wide">
-        <label for="thumbnail">Thumbnail path</label>
+        <label for="thumbnail">Thumbnail Path</label>
         <input type="text" id="thumbnail" name="thumbnail" value="<%= val('thumbnail') %>" maxlength="255" placeholder="/images/projects/my-project/01-home-thumb.webp">
         <% if (errors.thumbnail) { %><small class="error"><%= errors.thumbnail %></small><% } %>
     </div>
@@ -136,13 +136,13 @@ const val = (name) => (project[name] === null || project[name] === undefined) ? 
     </div>
 
     <div class="field wide">
-        <label for="screenshotFiles">Upload screenshots <span class="muted">(added to the list above; up to 8 at a time, titled from the file name, which you can edit after saving)</span></label>
+        <label for="screenshotFiles">Upload Screenshots <span class="muted">(added to the list above; up to 8 at a time, titled from the file name, which you can edit after saving)</span></label>
         <input type="file" id="screenshotFiles" name="screenshotFiles" accept="image/jpeg,image/png,image/webp,image/gif" multiple>
         <% if (errors.screenshotFiles) { %><small class="error"><%= errors.screenshotFiles %></small><% } %>
     </div>
 
     <div class="wide form-actions">
-        <button type="submit" class="btn btn-primary"><%= isNew ? 'Create project' : 'Save changes' %></button>
+        <button type="submit" class="btn btn-primary"><%= isNew ? 'Create Project' : 'Save Changes' %></button>
         <a class="btn btn-ghost" href="/projects">Cancel</a>
     </div>
 </form>

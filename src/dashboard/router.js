@@ -6,6 +6,7 @@ const rateLimit = require("express-rate-limit");
 const auth = require("./auth");
 const images = require("./images");
 const model = require("./model");
+const messages = require("../models/contactMessageModel");
 const validation = require("./validation");
 const { UPLOAD_DIR, UPLOAD_URL } = require("../config/uploads");
 
@@ -25,7 +26,14 @@ const upload = multer({
     { name: "files", maxCount: MAX_LIBRARY_UPLOADS }
 ]);
 
+const formatDate = (value) =>
+    value
+        ? new Date(value).toLocaleString("en-CA", { timeZone: "America/Vancouver", dateStyle: "medium", timeStyle: "short" })
+        : "";
+
 const MESSAGES = {
+    "message-deleted": "Message deleted.",
+    "message-updated": "Message marked as unread.",
     "images-uploaded": "Images uploaded.",
     "image-deleted": "Image deleted.",
     "image-in-use": "That image is used by a project, so it was not deleted. Remove it from the project first.",
@@ -123,7 +131,7 @@ const loginLimiter = rateLimit({
     {
         audit(req, "login rate-limited");
         res.status(429).render("dashboard/login", {
-            title: "Sign in",
+            title: "Sign In",
             loggedIn: false,
             csrfToken: "",
             flash: null,
@@ -139,7 +147,7 @@ router.get("/login", (req, res) =>
         return res.redirect("/");
     }
 
-    render(req, res, "login", { title: "Sign in", error: null });
+    render(req, res, "login", { title: "Sign In", error: null });
 });
 
 router.post("/login", loginLimiter, wrap(async (req, res) =>
@@ -166,7 +174,7 @@ router.post("/login", loginLimiter, wrap(async (req, res) =>
     await new Promise((resolve) => setTimeout(resolve, 600));
 
     res.status(401);
-    render(req, res, "login", { title: "Sign in", error: "Incorrect password." });
+    render(req, res, "login", { title: "Sign In", error: "Incorrect password." });
 }));
 
 router.post("/logout", auth.requireLogin, auth.requireCsrf, (req, res) =>
@@ -202,17 +210,102 @@ router.use((req, res, next) =>
             : "That upload was rejected (too many files, or an unexpected field).";
 
         res.status(400);
-        render(req, res, "error", { title: "Upload rejected", message });
+        render(req, res, "error", { title: "Upload Rejected", message });
     });
 });
 
 router.use(auth.requireCsrf);
 
+// Unread-message count for the badge on every page. A failure (e.g. the table
+// is missing) must never take the dashboard down, so it falls back to zero.
+router.use(async (req, res, next) =>
+{
+    try
+    {
+        res.locals.unreadMessages = await messages.unreadCount();
+    }
+    catch (error)
+    {
+        res.locals.unreadMessages = 0;
+    }
+
+    res.locals.formatDate = formatDate;
+    next();
+});
+
 router.get("/", wrap(async (req, res) =>
 {
-    const [projects, videos] = await Promise.all([model.listProjects(), model.listVideos()]);
+    const [projects, videos, recentMessages] = await Promise.all([
+        model.listProjects(),
+        model.listVideos(),
+        messages.recent(5).catch(() => [])
+    ]);
 
-    render(req, res, "index", { title: "Overview", projectCount: projects.length, videoCount: videos.length });
+    render(req, res, "index", {
+        title: "Overview",
+        projectCount: projects.length,
+        videoCount: videos.length,
+        recentMessages
+    });
+}));
+
+/*
+Contact-form messages
+*/
+router.get("/messages/count", wrap(async (req, res) =>
+{
+    res.json({ unread: await messages.unreadCount() });
+}));
+
+router.get("/messages", wrap(async (req, res) =>
+{
+    render(req, res, "messages", { title: "Messages", items: await messages.list() });
+}));
+
+router.get("/messages/:id", wrap(async (req, res) =>
+{
+    const id = parseId(req.params.id);
+    const message = id === null ? null : await messages.get(id);
+
+    if (!message)
+    {
+        return res.status(404).send("Not found");
+    }
+
+    if (!message.isRead)
+    {
+        await messages.setRead(id, true);
+        message.isRead = true;
+        res.locals.unreadMessages = Math.max(0, res.locals.unreadMessages - 1);
+    }
+
+    render(req, res, "message", { title: "Message", message });
+}));
+
+router.post("/messages/:id/read", wrap(async (req, res) =>
+{
+    const id = parseId(req.params.id);
+
+    if (id === null || !(await messages.setRead(id, req.body.read === "1")))
+    {
+        return res.status(404).send("Not found");
+    }
+
+    audit(req, `message ${req.body.read === "1" ? "read" : "unread"} id=${id}`);
+    res.redirect(req.body.read === "1" ? `/messages/${id}` : "/messages?msg=message-updated");
+}));
+
+router.post("/messages/:id/delete", wrap(async (req, res) =>
+{
+    const id = parseId(req.params.id);
+
+    if (id === null || !(await messages.remove(id)))
+    {
+        return res.status(404).send("Not found");
+    }
+
+    audit(req, `message deleted id=${id}`);
+    res.redirect("/messages?msg=message-deleted");
 }));
 
 /*
@@ -226,7 +319,7 @@ router.get("/projects", wrap(async (req, res) =>
 router.get("/projects/new", (req, res) =>
 {
     render(req, res, "project-form", {
-        title: "New project",
+        title: "New Project",
         project: blankProject,
         action: "/projects",
         isNew: true,
@@ -243,7 +336,7 @@ async function saveProject(req, res, id)
     {
         res.status(status);
         render(req, res, "project-form", {
-            title: isNew ? "New project" : "Edit project",
+            title: isNew ? "New Project" : "Edit Project",
             project: projectFormValues({ ...values, id }),
             action: isNew ? "/projects" : `/projects/${id}`,
             isNew,
@@ -350,7 +443,7 @@ router.get("/projects/:id/edit", wrap(async (req, res) =>
     }
 
     render(req, res, "project-form", {
-        title: "Edit project",
+        title: "Edit Project",
         project: projectFormValues(project),
         action: `/projects/${id}`,
         isNew: false,
@@ -464,7 +557,7 @@ async function renderVideos(req, res, status = 200, extra = {})
 {
     res.status(status);
     render(req, res, "videos", {
-        title: "Music videos",
+        title: "Music Videos",
         videos: await model.listVideos(),
         newVideo: { title: "", url: "" },
         editingId: null,

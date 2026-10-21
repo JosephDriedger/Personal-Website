@@ -1,0 +1,27 @@
+<%- include('_head') %>
+<div class="page-head">
+    <h1>Message</h1>
+    <a class="btn btn-ghost" href="/messages">Back to Messages</a>
+</div>
+<section class="card">
+    <dl class="meta">
+        <dt>From</dt><dd><%= message.name %></dd>
+        <dt>Email</dt><dd><a href="mailto:<%= encodeURIComponent(message.email) %>"><%= message.email %></a></dd>
+        <dt>Received</dt><dd><%= formatDate(message.createdAt) %></dd>
+    </dl>
+    <div class="message-body"><%= message.message %></div>
+    <div class="form-actions">
+        <a class="btn btn-primary" href="mailto:<%= encodeURIComponent(message.email) %>?subject=<%= encodeURIComponent('Re: Your Message on joeydriedger.ca') %>">Reply by Email</a>
+        <form method="POST" action="/messages/<%= message.id %>/read" class="inline">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="read" value="0">
+            <button type="submit" class="btn btn-ghost">Mark as Unread</button>
+        </form>
+        <form method="POST" action="/messages/<%= message.id %>/delete" class="inline"
+              data-confirm="Delete this message? This cannot be undone.">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+</section>
+<%- include('_foot') %>
