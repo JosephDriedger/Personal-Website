@@ -43,7 +43,7 @@ Built with a Node.js and Express backend, EJS templates, and a MySQL database, w
         '/images/projects/personal-website/01-home.webp',
         '/images/projects/personal-website/01-home-thumb.webp',
         TRUE,
-        4
+        5
     ),
     (
         'Flank: Capture the Flag',
@@ -64,7 +64,7 @@ Built in Unity with C# gameplay logic and custom UI designed for strategic play.
         '/images/projects/flank/01-gameplay-board.webp',
         '/images/projects/flank/01-gameplay-board-thumb.webp',
         TRUE,
-        5
+        6
     ),
     (
         'Echoes of the Forgotten Keep',
@@ -85,7 +85,7 @@ Built on a custom C++20 game engine written from scratch rather than an off-the-
         '/images/projects/echoes/01-dungeon.webp',
         '/images/projects/echoes/01-dungeon-thumb.webp',
         TRUE,
-        2
+        3
     ),
     (
         'Call of Cthulhu',
@@ -106,7 +106,7 @@ Built in Unity 6 with the Universal Render Pipeline and C#, using Game Creator f
         '/images/projects/call-of-cthulhu/01-statue-puzzle.webp',
         '/images/projects/call-of-cthulhu/01-statue-puzzle-thumb.webp',
         TRUE,
-        3
+        4
     ),
     (
         'Inertia Pause',
@@ -127,7 +127,7 @@ Built by a team in Unity with C#. My role was sourcing and designing the assets:
         '/images/projects/inertia-pause/01-bridge.webp',
         '/images/projects/inertia-pause/01-bridge-thumb.webp',
         TRUE,
-        7
+        8
     ),
     (
         'Wayfindr Campus Navigation App',
@@ -148,7 +148,7 @@ Built on a Node.js and Express backend with EJS-rendered pages and Mapbox GL JS 
         '/images/projects/wayfindr/01-directions.webp',
         '/images/projects/wayfindr/01-directions-thumb.webp',
         FALSE,
-        6
+        7
     ),
     (
         'MelodiProof AI',
@@ -169,7 +169,7 @@ A convolutional neural network (CNN) classifies mel spectrograms of the audio, p
         '/images/projects/melodiproof/01-ai-detected.webp',
         '/images/projects/melodiproof/01-ai-detected-thumb.webp',
         FALSE,
-        9
+        10
     ),
     (
         'UCM BCIT Website',
@@ -190,7 +190,7 @@ Built on a Node.js and Express backend with HTML, CSS, and JavaScript on the fro
         '/images/projects/ucm-bcit/01-home.webp',
         '/images/projects/ucm-bcit/01-home-thumb.webp',
         FALSE,
-        12
+        13
     ),
     (
         'Abalone Game',
@@ -211,7 +211,7 @@ Built by a team of four in Python 3.11, with Pygame for rendering and Photoshop 
         '/images/projects/abalone/01-ai-battle.webp',
         '/images/projects/abalone/01-ai-battle-thumb.webp',
         FALSE,
-        11
+        12
     ),
     (
         'Commute! App',
@@ -232,7 +232,7 @@ Built with a team of three students. The front end is plain HTML, CSS, and JavaS
         '/images/projects/commute/01-landing.webp',
         '/images/projects/commute/01-landing-thumb.webp',
         FALSE,
-        13
+        14
     ),
     (
         'Ecocities Industry Project',
@@ -253,7 +253,7 @@ Built as a Next.js frontend backed by a MongoDB database that is populated throu
         '/images/projects/ecocities/01-emissions.webp',
         '/images/projects/ecocities/01-emissions-thumb.webp',
         FALSE,
-        8
+        9
     ),
     (
         'Webmainland Media Project',
@@ -274,7 +274,7 @@ A Python API handles the matching logic, while a Next.js frontend presents the p
         '/images/projects/webmainland/01-overview.webp',
         '/images/projects/webmainland/01-overview-thumb.webp',
         FALSE,
-        10
+        11
     ),
     (
         'Lock-in'' Ringers Website',
@@ -295,7 +295,7 @@ Built on a Node.js and Express backend with EJS layouts and partials, and hand-w
         '/images/projects/lockin-ringers/01-home.webp',
         '/images/projects/lockin-ringers/01-home-thumb.webp',
         FALSE,
-        1
+        2
     ),
     (
         'Covenant Night',
@@ -316,7 +316,7 @@ Built solo in Unity 6 with the Universal Render Pipeline and C#. Guards run on a
         '/images/projects/covenant-night/01-palace-district.webp',
         '/images/projects/covenant-night/01-palace-district-thumb.webp',
         FALSE,
-        0
+        1
     ),
     (
         'Open Stance: Gyeorugi',
@@ -379,28 +379,30 @@ Built by a team of three in Unreal Engine 5, with GitHub for version control and
         '/images/projects/animal-farm/01-farm-overview.webp',
         '/images/projects/animal-farm/01-farm-overview-thumb.webp',
         FALSE,
-        14
+        15
     ),
     (
         'Barbershop Learning Tracks Generator',
         'barbershop-learning-tracks-generator',
-        'Windows and macOS desktop app that turns a four-part MusicXML score into 13 barbershop learning tracks, built with Python, PySide6, and OpenUtau.',
-        'The Barbershop Learning Tracks Generator (BLT Music Generator) is a Windows and macOS desktop app that makes learning tracks for barbershop quartets. You give it a four-part TTBB score exported from MuseScore as MusicXML, assign its parts to Tenor, Lead, Baritone, and Bass, pick a singing voice for each part, and it produces 13 synchronized tracks: the full quartet, plus a predominant, a solo, and a without track for each voice part, as WAV or MP3. Singers can then learn their own line against the other three parts, or sing it with the missing voice filled in.
+        'Windows and macOS desktop app that turns a four-part barbershop score into 13 learning tracks, built with Python, PySide6, and OpenUtau.',
+        'The Barbershop Learning Tracks Generator (BLT Music Generator) is a Windows and macOS desktop app that makes learning tracks for barbershop quartets. You give it a four-part TTBB score from MuseScore (MusicXML or a MuseScore project, or a PDF if you have Audiveris installed), assign its parts to Tenor, Lead, Baritone, and Bass, pick a singing voice for each part, and it produces 13 synchronized tracks: the full quartet, plus a predominant, a solo, and a without track for each voice part, as WAV or MP3. Singers can then learn their own line against the other three parts, or sing it with the missing voice filled in. In the full quartet the part that has the melody is louder, found from the words, and you can mark where it moves. A tune-up note and a metronome count-in can be added before the music.
 
-It is built in Python 3.12 with a PySide6 GUI and a command line. The score is parsed and validated first, with a readiness check that explains problems in plain language, a lyric review for notes that follow another part, and a pronunciation review for words the dictionary lacks. Each part is then rendered once through OpenUtau''s singing engine, run headless through a small C# host with a voicebank you provide, and a deterministic mixer builds all 13 tracks from those four stems with fixed gains and a checksummed manifest. A per-user Windows installer is built with Inno Setup, and the project has a large automated test suite. It is pre-release and still in active development, with musical acceptance testing against a real English voicebank outstanding.',
+It is built in Python 3.12 with a PySide6 GUI and a command line. The score is parsed and validated first, with a readiness check that explains problems in plain language, a lyric review for notes that follow another part, and a pronunciation review for words the dictionary lacks. Each part is then rendered once through OpenUtau''s singing engine, run headless through a small C# host with a voicebank you provide, and a deterministic mixer builds all 13 tracks from those four stems with fixed gains and a checksummed manifest. The project has a large automated test suite.
+
+Version 1.0.0 was released on GitHub on October 22, 2026, with a per-user Windows installer built with Inno Setup and disk images for Apple silicon and Intel Macs. The installers are unsigned, so Windows and macOS warn on first run, and the macOS builds have been tested only by automated runners.',
         'personal',
         'app',
         'Developer',
-        'in-progress',
+        'completed',
         '2026-10-06',
-        NULL,
+        '2026-10-22',
         'https://github.com/JosephDriedger/Barbershop-Learning-Tracks-Generator',
-        NULL,
+        'https://github.com/JosephDriedger/Barbershop-Learning-Tracks-Generator/releases/tag/v1.0.0',
         NULL,
         '/images/projects/barbershop-tracks/01-main-window.webp',
         '/images/projects/barbershop-tracks/01-main-window-thumb.webp',
         FALSE,
-        15
+        0
     );
 
 INSERT INTO PROJECT_TECH (PROJECT_ID, TECH_NAME, DISPLAY_ORDER)
@@ -607,4 +609,5 @@ VALUES
     (17, 'image', 'Concept Art: Shop, Inventory, and Barn Storage Screens', '/images/projects/animal-farm/05-shop-inventory.webp', '/images/projects/animal-farm/05-shop-inventory-thumb.webp', 5),
     (17, 'image', 'Concept Art: The Farm from Dawn to Night', '/images/projects/animal-farm/06-day-night.webp', '/images/projects/animal-farm/06-day-night-thumb.webp', 6),
     (18, 'image', 'Main Window, Score Loaded, Voices Assigned to Tenor, Lead, Baritone, and Bass', '/images/projects/barbershop-tracks/01-main-window.webp', '/images/projects/barbershop-tracks/01-main-window-thumb.webp', 1),
-    (18, 'image', 'Lyric Review, Notes That Follow the Lead''s Words', '/images/projects/barbershop-tracks/02-lyric-review.webp', '/images/projects/barbershop-tracks/02-lyric-review-thumb.webp', 2);
+    (18, 'image', 'Output Settings, Mix Balance, Melody-Following Full Quartet, Tune-Up Note, and Count-In', '/images/projects/barbershop-tracks/02-output-settings.webp', '/images/projects/barbershop-tracks/02-output-settings-thumb.webp', 2),
+    (18, 'image', 'Lyric Review, Notes That Follow the Lead''s Words', '/images/projects/barbershop-tracks/03-lyric-review.webp', '/images/projects/barbershop-tracks/03-lyric-review-thumb.webp', 3);
