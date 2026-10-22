@@ -22,7 +22,6 @@ const projectColumns = `
     WEBSITE_URL AS website,
     IMAGE_URL AS image,
     THUMBNAIL_URL AS thumbnail,
-    IS_FEATURED AS isFeatured,
     DISPLAY_ORDER AS displayOrder,
     UPDATED_AT AS updatedAt
 `;
@@ -45,7 +44,6 @@ function projectParams(values)
         values.website || null,
         values.image || null,
         values.thumbnail || null,
-        values.isFeatured ? 1 : 0,
         values.displayOrder
     ];
 }
@@ -133,7 +131,6 @@ exports.getProject = async (id) =>
 
     return {
         ...rows[0],
-        isFeatured: Boolean(rows[0].isFeatured),
         technologies: tech.map((row) => row.name),
         media
     };
@@ -145,8 +142,8 @@ exports.createProject = (values) => inTransaction(async (connection) =>
         `INSERT INTO PROJECTS
             (TITLE, SLUG, SHORT_DESCRIPTION, DESCRIPTION, CATEGORY, TYPE, ROLE, STATUS,
              START_DATE, END_DATE, GITHUB_URL, DEMO_URL, WEBSITE_URL, IMAGE_URL, THUMBNAIL_URL,
-             IS_FEATURED, DISPLAY_ORDER)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+             DISPLAY_ORDER)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         projectParams(values)
     );
 
@@ -161,7 +158,7 @@ exports.updateProject = (id, values) => inTransaction(async (connection) =>
         `UPDATE PROJECTS SET
             TITLE = ?, SLUG = ?, SHORT_DESCRIPTION = ?, DESCRIPTION = ?, CATEGORY = ?, TYPE = ?,
             ROLE = ?, STATUS = ?, START_DATE = ?, END_DATE = ?, GITHUB_URL = ?, DEMO_URL = ?,
-            WEBSITE_URL = ?, IMAGE_URL = ?, THUMBNAIL_URL = ?, IS_FEATURED = ?, DISPLAY_ORDER = ?
+            WEBSITE_URL = ?, IMAGE_URL = ?, THUMBNAIL_URL = ?, DISPLAY_ORDER = ?
          WHERE ID = ?`,
         [...projectParams(values), id]
     );

@@ -20,7 +20,6 @@ const validProject = () => ({
     image: "/images/projects/x/01.webp",
     thumbnail: "",
     displayOrder: "3",
-    isFeatured: "on",
     technologies: "C#, Unity\nC#\n  Blender ",
     media: "First | /images/projects/x/01.webp | /images/projects/x/01-thumb.webp\nSecond | /images/projects/x/02.webp"
 });
@@ -31,7 +30,6 @@ test("a valid project passes and is normalised", () =>
 
     assert.deepStrictEqual(errors, {});
     assert.strictEqual(values.slug, "my-project");
-    assert.strictEqual(values.isFeatured, true);
     assert.strictEqual(values.displayOrder, 3);
     assert.deepStrictEqual(values.technologies, ["C#", "Unity", "Blender"]);
     assert.strictEqual(values.media.length, 2);

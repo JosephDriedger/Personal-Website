@@ -300,7 +300,6 @@ function validateProject(body)
             website: website || "",
             image: image || "",
             thumbnail: thumbnail || "",
-            isFeatured: body.isFeatured === "on",
             displayOrder,
             technologies,
             media

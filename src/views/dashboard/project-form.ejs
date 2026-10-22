@@ -82,10 +82,6 @@ const val = (name) => (project[name] === null || project[name] === undefined) ? 
         <% if (errors.displayOrder) { %><small class="error"><%= errors.displayOrder %></small><% } %>
     </div>
 
-    <div class="field check">
-        <label><input type="checkbox" name="isFeatured" <%= project.isFeatured ? 'checked' : '' %>> Featured</label>
-    </div>
-
     <div class="field wide">
         <label for="github">GitHub Link</label>
         <input type="url" id="github" name="github" value="<%= val('github') %>" maxlength="255" placeholder="https://github.com/...">

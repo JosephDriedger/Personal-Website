@@ -94,7 +94,6 @@ const blankProject = projectFormValues({
     website: "",
     image: "",
     thumbnail: "",
-    isFeatured: false,
     displayOrder: 0,
     technologies: [],
     media: []

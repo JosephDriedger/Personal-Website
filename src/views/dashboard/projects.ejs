@@ -6,7 +6,7 @@
 <div class="card table-wrap">
     <table>
         <thead>
-            <tr><th>Title</th><th>Type</th><th>Category</th><th>Status</th><th>Featured</th><th></th></tr>
+            <tr><th>Title</th><th>Type</th><th>Category</th><th>Status</th><th></th></tr>
         </thead>
         <tbody>
         <% projects.forEach(project => { %>
@@ -15,7 +15,6 @@
                 <td><%= project.type %></td>
                 <td><%= project.category %></td>
                 <td><%= project.status %></td>
-                <td><%= project.isFeatured ? 'Yes' : '' %></td>
                 <td class="actions">
                     <a class="btn btn-ghost" href="/projects/<%= project.id %>/edit">Edit</a>
                     <form method="POST" action="/projects/<%= project.id %>/delete" class="inline"
