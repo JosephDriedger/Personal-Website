@@ -337,7 +337,7 @@ Built solo as my BCIT capstone in Unreal Engine 5 and C++, and currently in pre-
         '/images/projects/open-stance/01-competition-arena.webp',
         '/images/projects/open-stance/01-competition-arena-thumb.webp',
         FALSE,
-        16
+        17
     ),
     (
         'Dawn Beyond Death',
@@ -358,7 +358,7 @@ Built solo in Unreal Engine 5 with C++ for the systems, characters, worlds, and 
         '/images/projects/dawn-beyond-death/01-resurrection.webp',
         '/images/projects/dawn-beyond-death/01-resurrection-thumb.webp',
         FALSE,
-        17
+        18
     ),
     (
         'Animal Farm',
@@ -379,7 +379,7 @@ Built by a team of three in Unreal Engine 5, with GitHub for version control and
         '/images/projects/animal-farm/01-farm-overview.webp',
         '/images/projects/animal-farm/01-farm-overview-thumb.webp',
         FALSE,
-        15
+        16
     ),
     (
         'Barbershop Learning Tracks Generator',
@@ -403,6 +403,27 @@ Version 1.0.0 was released on GitHub on October 22, 2026, with a per-user Window
         '/images/projects/barbershop-tracks/01-main-window-thumb.webp',
         FALSE,
         0
+    ),
+    (
+        'I Am Chad: Fitness RPG',
+        'i-am-chad-fitness-rpg',
+        'Cross-platform mobile fitness RPG in Flutter that turns real workouts into animated fantasy adventures, with a guild hall, turn-based battles, and a 79-exercise catalog.',
+        'I Am Chad: Fitness RPG is a mobile game that turns real-world exercise into fantasy adventures. You log workouts at your own level from a catalog of 79 exercises covering bodyweight, core, cardio, resistance, mobility, and sports, and the game turns them into XP and adventure energy under transparent, capped rules. You spend that energy on short turn-based expeditions run by Chad, a theatrical and slightly unreliable guildmaster, fighting enemies, finding loot, and dressing your hero in the gear. Easier versions of an exercise earn exactly the same as harder ones, streaks have rest days built in and never take anything away, and everything stays on the device, with no account and no pay-to-win.
+
+Built in Flutter and Dart, with Riverpod for state, Drift on SQLite for offline-first saves, and the Flame engine for the animated guild hall and battle scenes. The game rules are pure Dart with no Flutter imports, so they are deterministic and unit-testable, and the scenes only draw what the rules decided. All art is drawn in code and all sound is synthesized, including a looping animated demonstration with form cues for every exercise. An optional camera mode counts push-ups and squats on the device with ML Kit pose detection and never saves video. The game is in pre-alpha: the core loop is playable end to end on an Android emulator, but it has not been tried on a physical phone or on iOS yet, and the camera counting has not counted a real person''s reps yet.',
+        'personal',
+        'game',
+        'Developer',
+        'in-progress',
+        '2026-10-22',
+        NULL,
+        'https://github.com/JosephDriedger/I-Am-Chad-Fitness-RPG',
+        NULL,
+        NULL,
+        '/images/projects/i-am-chad/01-guild-hall-and-hero.webp',
+        '/images/projects/i-am-chad/01-guild-hall-and-hero-thumb.webp',
+        FALSE,
+        15
     );
 
 INSERT INTO PROJECT_TECH (PROJECT_ID, TECH_NAME, DISPLAY_ORDER)
@@ -508,7 +529,14 @@ VALUES
     (18, 'PySide6', 2),
     (18, 'C#', 3),
     (18, 'OpenUtau', 4),
-    (18, 'Git', 5);
+    (18, 'Git', 5),
+    -- 19: I Am Chad: Fitness RPG
+    (19, 'Flutter', 1),
+    (19, 'Dart', 2),
+    (19, 'Flame', 3),
+    (19, 'Riverpod', 4),
+    (19, 'SQLite', 5),
+    (19, 'Git', 6);
 
 INSERT INTO PROJECT_MEDIA (
         PROJECT_ID,
@@ -610,4 +638,7 @@ VALUES
     (17, 'image', 'Concept Art: The Farm from Dawn to Night', '/images/projects/animal-farm/06-day-night.webp', '/images/projects/animal-farm/06-day-night-thumb.webp', 6),
     (18, 'image', 'Main Window, Score Loaded, Voices Assigned to Tenor, Lead, Baritone, and Bass', '/images/projects/barbershop-tracks/01-main-window.webp', '/images/projects/barbershop-tracks/01-main-window-thumb.webp', 1),
     (18, 'image', 'Output Settings, Mix Balance, Melody-Following Full Quartet, Tune-Up Note, and Count-In', '/images/projects/barbershop-tracks/02-output-settings.webp', '/images/projects/barbershop-tracks/02-output-settings-thumb.webp', 2),
-    (18, 'image', 'Lyric Review, Notes That Follow the Lead''s Words', '/images/projects/barbershop-tracks/03-lyric-review.webp', '/images/projects/barbershop-tracks/03-lyric-review-thumb.webp', 3);
+    (18, 'image', 'Lyric Review, Notes That Follow the Lead''s Words', '/images/projects/barbershop-tracks/03-lyric-review.webp', '/images/projects/barbershop-tracks/03-lyric-review-thumb.webp', 3),
+    (19, 'image', 'Guild Hall with Chad and the Hero, and the Hero Screen with Stats and Gear Slots', '/images/projects/i-am-chad/01-guild-hall-and-hero.webp', '/images/projects/i-am-chad/01-guild-hall-and-hero-thumb.webp', 1),
+    (19, 'image', 'Exercise Catalog of 79 Exercises, and an Animated Push-Up Demonstration with Form Cues', '/images/projects/i-am-chad/02-exercise-catalog-and-demo.webp', '/images/projects/i-am-chad/02-exercise-catalog-and-demo-thumb.webp', 2),
+    (19, 'image', 'Quest Board with Gentle Daily Suggestions, and the Journal with a 7-Day Effort Chart', '/images/projects/i-am-chad/03-quest-board-and-journal.webp', '/images/projects/i-am-chad/03-quest-board-and-journal-thumb.webp', 3);
