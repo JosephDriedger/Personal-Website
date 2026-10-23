@@ -15,7 +15,7 @@ CREATE TABLE PROJECTS
     SHORT_DESCRIPTION VARCHAR(255),
     DESCRIPTION TEXT,
     CATEGORY ENUM('Personal','Academic','Industry') NOT NULL DEFAULT 'Personal',
-    TYPE ENUM('Game','App','Website','AI','Other') NOT NULL DEFAULT 'App',
+    TYPE ENUM('Game','App','Website','Other') NOT NULL DEFAULT 'App',
     ROLE VARCHAR(255),
     STATUS ENUM('Planned','In-Progress','Completed') NOT NULL DEFAULT 'Completed',
     START_DATE DATE,

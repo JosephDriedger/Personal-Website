@@ -1,7 +1,7 @@
 const { extractYouTubeId } = require("../utils/youtube");
 
 const CATEGORIES = ["Personal", "Academic", "Industry"];
-const TYPES = ["Game", "App", "Website", "AI", "Other"];
+const TYPES = ["Game", "App", "Website", "Other"];
 const STATUSES = ["Planned", "In-Progress", "Completed"];
 
 const MAX_TECHNOLOGIES = 30;

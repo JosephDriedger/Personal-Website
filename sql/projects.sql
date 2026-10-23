@@ -158,7 +158,7 @@ Built on a Node.js and Express backend with EJS-rendered pages and Mapbox GL JS 
 
 A convolutional neural network (CNN) classifies mel spectrograms of the audio, producing a binary result with strong accuracy. It was trained on audio datasets with Python and TensorFlow and exported to ONNX for fast inference inside the app, with full training and evaluation pipelines for iterating on model performance. The interface is a Python Tkinter GUI, packaged as a Windows executable with PyInstaller and an Inno Setup installer.',
         'academic',
-        'ai',
+        'app',
         'AI & ML Engineer',
         'completed',
         '2024-09-01',

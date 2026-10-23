@@ -116,7 +116,7 @@ const mockProjects = [
         shortDescription: "CNN model for detecting AI-generated music built with Python and TensorFlow.",
         description: "A machine learning classifier that detects AI-generated music in audio files. A convolutional neural network (CNN) is trained on audio datasets using Python and TensorFlow, producing a binary classification result with strong accuracy. Includes full training and evaluation pipelines for iterating on model performance.",
         category: "Academic",
-        type: "ai",
+        type: "app",
         role: "AI & ML Engineer",
         status: "completed",
         image: "/images/projects/melodiproof/01-ai-detected.webp",
